@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="sl" data-lang="sl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Picerija Marco Polo — Trebija, Gorenja vas</title>
+<meta name="description" content="Picerija Marco Polo v Trebiji pri Gorenji vasi — pice, zrezki, kalamari in solatni krožniki na razgledni terasi.">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Picerija Marco Polo">
+<meta property="og:description" content="Pice, zrezki in kalamari na razgledni terasi v Trebiji.">
+<meta property="og:image" content="assets/hero.jpg">
+<meta property="og:type" content="restaurant.menu">
+
+<link rel="icon" type="image/png" href="assets/logo.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Caveat:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --cream:#F7F2E6;
+    --cream-soft:#FBF8F0;
+    --ink:#2B2620;
+    --ink-soft:#5C5448;
+    --pine:#1F5C38;
+    --pine-deep:#143F26;
+    --tomato:#C8372C;
+    --tomato-soft:#E8DCC9;
+    --sage:#8AA378;
+    --line: rgba(43,38,32,0.14);
+    --shadow: 0 18px 50px -20px rgba(20,40,25,0.35);
+    --maxw: 1180px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
+
+  h1,h2,h3{font-family:'Fraunces',serif; margin:0; letter-spacing:-0.01em;}
+  .script{
+    font-family:'Caveat',cursive;
+    color:var(--pine);
+    font-weight:700;
+    line-height:1;
+  }
+
+  /* ---------- Skip / focus ---------- */
+  a:focus-visible, button:focus-visible{
+    outline:3px solid var(--tomato);
+    outline-offset:3px;
+    border-radius:4px;
+  }
+
+  /* ---------- Top bar ---------- */
+  .topbar{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    background:rgba(247,242,230,0.0);
+    transition:background .35s ease, box-shadow .35s ease, padding .35s ease;
+    padding:18px 0;
+  }
+  .topbar.scrolled{
+    background:rgba(247,242,230,0.92);
+    backdrop-filter:blur(10px);
+    box-shadow:0 4px 24px rgba(20,40,25,0.08);
+    padding:10px 0;
+  }
+  .topbar .wrap{display:flex; align-items:center; justify-content:space-between; gap:18px;}
+  .brand{display:flex; align-items:center; gap:10px; text-decoration:none;}
+  .brand img{height:34px; width:auto;}
+  .brand span{font-family:'Fraunces',serif; font-weight:600; font-size:1.05rem; color:var(--pine-deep); white-space:nowrap;}
+  @media(max-width:559px){ .brand span{display:none !important;} }
+
+  .nav-links{display:none; gap:28px; align-items:center; list-style:none; margin:0; padding:0;}
+  .nav-links a{
+    font-size:0.92rem; font-weight:600; text-decoration:none; color:var(--ink);
+    position:relative; padding-bottom:4px;
+  }
+  .nav-links a::after{
+    content:""; position:absolute; left:0; right:0; bottom:0; height:2px;
+    background:var(--tomato); transform:scaleX(0); transform-origin:left;
+    transition:transform .25s ease;
+  }
+  .nav-links a:hover::after{transform:scaleX(1);}
+  @media(min-width:900px){ .nav-links{display:flex;} }
+
+  .topbar-actions{display:flex; align-items:center; gap:10px;}
+  .lang-toggle{
+    display:flex; border:1.5px solid var(--pine); border-radius:30px; overflow:hidden;
+    font-size:0.78rem; font-weight:700; letter-spacing:0.03em;
+  }
+  .lang-toggle button{
+    border:none; background:transparent; padding:7px 13px; cursor:pointer;
+    color:var(--pine); font-family:'Inter',sans-serif; font-weight:700;
+    transition:background .2s, color .2s;
+  }
+  .lang-toggle button.active{background:var(--pine); color:#fff;}
+
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--tomato); color:#fff; text-decoration:none;
+    padding:11px 20px; border-radius:30px; font-weight:600; font-size:0.92rem;
+    box-shadow:0 10px 24px -8px rgba(200,55,44,0.55);
+    transition:transform .2s ease, box-shadow .2s ease;
+    border:none; cursor:pointer;
+    white-space:nowrap;
+  }
+  .btn:hover{transform:translateY(-2px); box-shadow:0 14px 30px -8px rgba(200,55,44,0.6);}
+  .btn.ghost{
+    background:transparent; color:var(--pine-deep); border:1.5px solid var(--pine);
+    box-shadow:none;
+  }
+  .btn.ghost:hover{background:var(--pine); color:#fff;}
+  .btn.small{padding:8px 16px; font-size:0.85rem;}
+
+  .call-fab{display:none;}
+  @media(max-width:899px){
+    .topbar-actions .btn span.btn-text{display:none;}
+    .topbar-actions .btn{padding:11px 13px;}
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    align-items:flex-end;
+    overflow:hidden;
+  }
+  .hero-media{
+    position:absolute; inset:0; z-index:0;
+  }
+  .hero-media img{
+    width:100%; height:100%; object-fit:cover;
+    transform:scale(1.04);
+  }
+  .hero-media::after{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(20,30,18,0.18) 0%, rgba(20,30,18,0.10) 35%, rgba(18,26,15,0.78) 100%);
+  }
+  .hero-inner{
+    position:relative; z-index:2;
+    width:100%;
+    padding:170px 0 64px;
+    color:#fff;
+  }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:10px;
+    font-size:0.8rem; letter-spacing:0.18em; text-transform:uppercase;
+    font-weight:600; color:#EFE6CE;
+    margin-bottom:18px;
+  }
+  .eyebrow::before{
+    content:""; width:28px; height:1.5px; background:#EFE6CE; display:inline-block;
+  }
+  .hero h1{
+    font-size:clamp(2.6rem, 7vw, 5.4rem);
+    font-weight:600;
+    line-height:0.98;
+    color:#fff;
+    max-width:14ch;
+  }
+  .hero h1 em{
+    font-style:italic; font-weight:500; color:#F4C9A8;
+  }
+  .hero-sub{
+    margin-top:22px;
+    font-size:1.08rem;
+    max-width:480px;
+    color:#EDE7D8;
+    line-height:1.6;
+  }
+  .hero-actions{
+    margin-top:34px;
+    display:flex; flex-wrap:wrap; gap:14px;
+  }
+  .hero-meta{
+    margin-top:56px;
+    display:flex; flex-wrap:wrap; gap:36px;
+    border-top:1px solid rgba(255,255,255,0.25);
+    padding-top:22px;
+  }
+  .hero-meta div{font-size:0.85rem; color:#D8D2BF;}
+  .hero-meta strong{display:block; font-family:'Fraunces',serif; font-size:1.05rem; color:#fff; font-weight:600; margin-bottom:2px;}
+
+  /* ---------- Sections generic ---------- */
+  section{position:relative;}
+  .section-pad{padding:96px 0;}
+  @media(max-width:700px){ .section-pad{padding:64px 0;} }
+
+  .kicker{
+    font-family:'Caveat',cursive; font-size:2.1rem; color:var(--tomato); font-weight:700;
+    margin-bottom:-6px;
+  }
+  .section-head{
+    display:flex; justify-content:space-between; align-items:flex-end; gap:24px;
+    margin-bottom:48px; flex-wrap:wrap;
+  }
+  .section-head h2{font-size:clamp(1.9rem, 4vw, 2.7rem); font-weight:600; color:var(--pine-deep);}
+  .section-head p{max-width:420px; color:var(--ink-soft); font-size:0.98rem; line-height:1.6;}
+
+  /* ---------- About / intro strip ---------- */
+  .about{
+    background:var(--cream-soft);
+  }
+  .about-grid{
+    display:grid; grid-template-columns: 1.1fr 0.9fr; gap:64px; align-items:center;
+  }
+  @media(max-width:860px){ .about-grid{grid-template-columns:1fr; gap:40px;} }
+  .about-copy p{font-size:1.05rem; line-height:1.75; color:var(--ink-soft); margin:0 0 16px;}
+  .about-copy p:first-of-type{font-size:1.18rem; color:var(--ink);}
+  .about-figure{
+    position:relative; border-radius:18px; overflow:hidden; box-shadow:var(--shadow);
+  }
+  .about-figure img{width:100%; height:100%; object-fit:cover; aspect-ratio:4/5;}
+  .about-figure::before{
+    content:"";
+    position:absolute; inset:0;
+    border:1px solid rgba(255,255,255,0.5);
+    border-radius:18px;
+    pointer-events:none;
+  }
+  .pill-row{display:flex; gap:10px; flex-wrap:wrap; margin-top:28px;}
+  .pill{
+    border:1px solid var(--line); background:#fff; border-radius:30px;
+    padding:8px 16px; font-size:0.82rem; font-weight:600; color:var(--pine-deep);
+    display:flex; align-items:center; gap:8px;
+  }
+  .pill .dot{width:7px; height:7px; border-radius:50%; background:var(--tomato);}
+
+  /* ---------- Menu navigation chips ---------- */
+  .menu-nav{
+    position:sticky; top:64px; z-index:40;
+    background:var(--cream);
+    border-bottom:1px solid var(--line);
+    padding:14px 0;
+  }
+  .menu-nav-scroll{
+    display:flex; gap:10px; overflow-x:auto; scrollbar-width:none; padding-bottom:2px;
+  }
+  .menu-nav-scroll::-webkit-scrollbar{display:none;}
+  .chip{
+    flex:0 0 auto;
+    border:1.5px solid var(--line);
+    background:#fff;
+    padding:8px 18px;
+    border-radius:24px;
+    font-size:0.85rem; font-weight:600;
+    text-decoration:none; color:var(--ink-soft);
+    transition:all .2s ease;
+    white-space:nowrap;
+  }
+  .chip:hover, .chip.active{
+    background:var(--pine); color:#fff; border-color:var(--pine);
+  }
+
+  /* ---------- Menu pages (the signature element) ---------- */
+  .menu-page{
+    background:#fff;
+    border-radius:22px;
+    box-shadow:var(--shadow);
+    padding:52px 48px 44px;
+    margin-bottom:40px;
+    position:relative;
+    scroll-margin-top:140px;
+  }
+  @media(max-width:700px){ .menu-page{padding:38px 24px 30px;} }
+  .menu-page::before{
+    content:"";
+    position:absolute; top:0; left:48px; right:48px; height:6px;
+    background:repeating-linear-gradient(90deg, var(--tomato) 0 18px, transparent 18px 30px);
+    border-radius:0 0 6px 6px;
+    opacity:0.75;
+  }
+  @media(max-width:700px){ .menu-page::before{left:24px; right:24px;} }
+
+  .menu-page-head{
+    display:flex; align-items:baseline; justify-content:space-between; gap:20px;
+    border-bottom:2px solid var(--ink); padding-bottom:18px; margin-bottom:8px;
+    flex-wrap:wrap;
+  }
+  .menu-page-head .script{font-size:clamp(2.4rem,5vw,3.4rem);}
+  .menu-page-note{font-size:0.85rem; color:var(--ink-soft); font-style:italic; max-width:260px; text-align:right;}
+
+  .menu-cols{
+    display:grid; grid-template-columns:auto 1fr auto auto auto; gap:6px 18px;
+    margin-top:24px;
+  }
+  .menu-cols.simple{grid-template-columns:1fr auto;}
+  .menu-col-label{
+    font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--ink-soft);
+    font-weight:700; padding-bottom:10px; border-bottom:1px solid var(--line); margin-bottom:6px;
+    grid-column:span 1;
+  }
+  .col-head-row{display:contents;}
+
+  .menu-row{
+    display:grid; grid-template-columns:auto 1fr auto auto auto;
+    gap:6px 18px;
+    padding:14px 0;
+    border-bottom:1px dashed var(--line);
+    align-items:start;
+  }
+  .menu-row:last-child{border-bottom:none;}
+  .menu-row.simple{grid-template-columns:1fr auto;}
+  .menu-row .name{font-weight:600; font-size:1.02rem; color:var(--ink);}
+  .menu-row .desc{
+    grid-column:1 / -1;
+    font-size:0.88rem; color:var(--ink-soft); margin-top:-4px; line-height:1.5;
+  }
+  .menu-row.simple .desc{grid-column:1/2;}
+  .price{
+    font-family:'Fraunces',serif; font-weight:600; color:var(--pine-deep);
+    white-space:nowrap; text-align:right; font-size:1.02rem;
+  }
+  .price.dim{color:var(--ink-soft); font-weight:500; font-size:0.92rem;}
+  .price-head{font-size:0.72rem; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-soft); font-weight:700; text-align:right;}
+
+  .menu-cols.spirits{grid-template-columns:1fr auto auto; gap:6px 22px;}
+  .menu-cols.spirits .menu-row{grid-template-columns:1fr auto auto;}
+  @media(max-width:640px){
+    .menu-cols.spirits{grid-template-columns:1fr; gap:0;}
+    .menu-cols.spirits .col-head-row{display:none;}
+    .menu-cols.spirits .menu-row{
+      grid-template-columns:1fr; display:flex; flex-wrap:wrap; padding:14px 0;
+    }
+    .menu-cols.spirits .menu-row .name{flex:1 0 100%;}
+    .menu-cols.spirits .menu-row .price{
+      order:2; text-align:left; font-size:0.92rem; margin-top:8px; margin-right:12px;
+      padding:4px 10px; background:var(--cream-soft); border-radius:8px;
+    }
+    .menu-cols.spirits .menu-row .price[data-size="sm"]::before{content:"0,03l "; font-size:0.68rem; color:var(--ink-soft); font-family:'Inter',sans-serif; font-weight:700;}
+    .menu-cols.spirits .menu-row .price[data-size="lg"]::before{content:"0,05l "; font-size:0.68rem; color:var(--ink-soft); font-family:'Inter',sans-serif; font-weight:700;}
+  }
+
+  @media(max-width:640px){
+    .menu-cols:not(.simple){grid-template-columns:1fr; gap:0;}
+    .menu-cols:not(.simple) .col-head-row{display:none;}
+    .menu-cols:not(.simple) .menu-row{
+      padding:16px 0;
+      display:flex; flex-wrap:wrap;
+    }
+    .menu-cols:not(.simple) .menu-row .name{flex:1 0 100%;}
+    .menu-cols:not(.simple) .menu-row .desc{flex:1 0 100%; order:1; margin-top:2px;}
+    .menu-cols:not(.simple) .menu-row .price{
+      order:2; text-align:left; font-size:0.92rem;
+      margin-top:8px; margin-right:16px;
+      padding:4px 10px; background:var(--cream-soft); border-radius:8px;
+    }
+    .menu-cols:not(.simple) .menu-row .price[data-size]::before{font-size:0.7rem; color:var(--ink-soft); font-family:'Inter',sans-serif; font-weight:700;}
+    .menu-cols:not(.simple) .menu-row .price[data-size="s"]::before{content:"MALA ";}
+    .menu-cols:not(.simple) .menu-row .price[data-size="l"]::before{content:"VELIKA ";}
+    .menu-cols:not(.simple) .menu-row .price[data-size="f"]::before{content:"DRUŽ. ";}
+  }
+
+  .menu-foot-note{
+    margin-top:22px; font-size:0.85rem; color:var(--ink-soft);
+    background:var(--cream-soft); border-radius:12px; padding:14px 18px;
+    border-left:3px solid var(--tomato);
+  }
+
+  /* daily lunch banner */
+  .lunch-banner{
+    background:linear-gradient(135deg, var(--pine) 0%, var(--pine-deep) 100%);
+    color:#fff;
+    border-radius:22px;
+    padding:40px 44px;
+    display:flex; align-items:center; justify-content:space-between; gap:30px;
+    margin-bottom:40px;
+    flex-wrap:wrap;
+    box-shadow:var(--shadow);
+  }
+  .lunch-banner h3{color:#fff; font-size:1.7rem; font-weight:600;}
+  .lunch-banner p{margin:8px 0 0; color:#D9E6CF; font-size:0.95rem; max-width:420px;}
+  .lunch-price{
+    font-family:'Fraunces',serif; font-size:2.6rem; font-weight:700; color:#F4C9A8;
+    line-height:1;
+  }
+  .lunch-price span{font-size:1rem; font-weight:500; color:#D9E6CF; display:block; margin-top:4px;}
+
+  /* ---------- Gallery strip ---------- */
+  .gallery-strip{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:14px;
+  }
+  @media(max-width:760px){ .gallery-strip{grid-template-columns:repeat(2,1fr);} }
+  .gallery-strip figure{
+    margin:0; border-radius:14px; overflow:hidden; aspect-ratio:3/4; box-shadow:0 10px 30px -14px rgba(20,40,25,0.4);
+  }
+  .gallery-strip img{width:100%; height:100%; object-fit:cover; transition:transform .5s ease;}
+  .gallery-strip figure:hover img{transform:scale(1.06);}
+
+  /* ---------- Visit / location ---------- */
+  .visit{background:var(--pine-deep); color:#fff; position:relative; overflow:hidden;}
+  .visit::before{
+    content:""; position:absolute; top:-120px; right:-120px; width:340px; height:340px;
+    border-radius:50%; background:radial-gradient(circle, rgba(255,255,255,0.07), transparent 70%);
+  }
+  .visit-grid{display:grid; grid-template-columns:1fr 1fr; gap:50px; align-items:stretch;}
+  @media(max-width:900px){ .visit-grid{grid-template-columns:1fr;} }
+  .visit h2{color:#fff;}
+  .visit .kicker{color:#F4C9A8;}
+  .visit-info p{color:#CFE0C7; line-height:1.7; font-size:1.02rem; margin:0 0 28px; max-width:440px;}
+  .info-list{list-style:none; margin:0 0 32px; padding:0; display:flex; flex-direction:column; gap:18px;}
+  .info-list li{display:flex; gap:16px; align-items:flex-start;}
+  .info-list .ico{
+    flex:0 0 auto; width:38px; height:38px; border-radius:50%;
+    background:rgba(255,255,255,0.12); display:flex; align-items:center; justify-content:center;
+  }
+  .info-list .ico svg{width:18px; height:18px; stroke:#F4C9A8;}
+  .info-list .label{font-size:0.78rem; text-transform:uppercase; letter-spacing:0.06em; color:#9DB793; font-weight:700; margin-bottom:3px;}
+  .info-list .value{font-size:1.02rem; color:#fff; font-weight:500;}
+  .info-list a.value{text-decoration:none;}
+  .info-list a.value:hover{color:#F4C9A8;}
+
+  .hours-table{width:100%; border-collapse:collapse; margin-top:6px;}
+  .hours-table td{padding:7px 0; font-size:0.92rem; color:#D9E6CF; border-bottom:1px solid rgba(255,255,255,0.1); display:inline-block; min-width:112px;}
+  .hours-table td:last-child{text-align:right; font-weight:600; color:#fff; min-width:90px;}
+  .hours-table tr{display:flex;}
+  .hours-table tr.today td{color:#F4C9A8; font-weight:700;}
+
+  .map-wrap{
+    border-radius:20px; overflow:hidden; position:relative; min-height:380px;
+    box-shadow:0 24px 60px -20px rgba(0,0,0,0.5);
+    border:1px solid rgba(255,255,255,0.15);
+  }
+  .map-wrap iframe{width:100%; height:100%; min-height:380px; border:0; display:block;}
+  .map-overlay-btn{
+    position:absolute; bottom:18px; left:18px; right:18px;
+    display:flex; justify-content:center;
+  }
+
+  .social-row{display:flex; gap:12px; margin-top:30px; flex-wrap:wrap;}
+  .social-btn{
+    display:inline-flex; align-items:center; gap:10px;
+    background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.25);
+    color:#fff; text-decoration:none; padding:11px 18px; border-radius:30px;
+    font-weight:600; font-size:0.9rem; transition:background .2s ease;
+  }
+  .social-btn:hover{background:rgba(255,255,255,0.18);}
+  .social-btn svg{width:18px; height:18px; fill:#fff;}
+
+  /* ---------- Footer ---------- */
+  footer{background:var(--ink); color:#C9C2B3; padding:46px 0 30px;}
+  .footer-grid{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:24px;}
+  .footer-brand{display:flex; align-items:center; gap:12px;}
+  .footer-brand img{height:30px; filter:brightness(0) invert(1); opacity:0.92;}
+  footer .legal{font-size:0.78rem; color:#8B8473; line-height:1.6; max-width:560px;}
+  footer a{text-decoration:none; color:#C9C2B3;}
+  footer a:hover{color:#fff;}
+  .footer-bottom{
+    margin-top:30px; padding-top:22px; border-top:1px solid rgba(255,255,255,0.08);
+    font-size:0.78rem; color:#766F60; display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap;
+  }
+
+  /* lang visibility */
+  [data-i18n-lang]{display:none;}
+  html[data-lang="sl"] [data-i18n-lang="sl"]{display:revert;}
+  html[data-lang="en"] [data-i18n-lang="en"]{display:revert;}
+  span[data-i18n-lang], strong[data-i18n-lang], em[data-i18n-lang]{display:none;}
+  html[data-lang="sl"] span[data-i18n-lang="sl"], html[data-lang="sl"] strong[data-i18n-lang="sl"], html[data-lang="sl"] em[data-i18n-lang="sl"]{display:inline;}
+  html[data-lang="en"] span[data-i18n-lang="en"], html[data-lang="en"] strong[data-i18n-lang="en"], html[data-lang="en"] em[data-i18n-lang="en"]{display:inline;}
+  div[data-i18n-lang], p[data-i18n-lang], li[data-i18n-lang]{display:none;}
+  html[data-lang="sl"] div[data-i18n-lang="sl"], html[data-lang="sl"] p[data-i18n-lang="sl"], html[data-lang="sl"] li[data-i18n-lang="sl"]{display:revert;}
+  html[data-lang="en"] div[data-i18n-lang="en"], html[data-lang="en"] p[data-i18n-lang="en"], html[data-lang="en"] li[data-i18n-lang="en"]{display:revert;}
+  td[data-i18n-lang]{display:none;}
+  html[data-lang="sl"] td[data-i18n-lang="sl"]{display:table-cell;}
+  html[data-lang="en"] td[data-i18n-lang="en"]{display:table-cell;}
+
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1; transform:none; transition:none;}
+    html{scroll-behavior:auto;}
+  }
+
+  .back-to-top{
+    position:fixed; bottom:24px; right:24px; z-index:90;
+    width:46px; height:46px; border-radius:50%;
+    background:var(--pine); color:#fff; border:none; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 10px 24px -6px rgba(20,40,25,0.5);
+    opacity:0; pointer-events:none; transform:translateY(10px);
+    transition:opacity .25s, transform .25s;
+  }
+  .back-to-top.show{opacity:1; pointer-events:auto; transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<!-- ===================== TOP BAR ===================== -->
+<header class="topbar" id="topbar">
+  <div class="wrap">
+    <a href="#top" class="brand">
+      <img src="assets/logo.png" alt="Marco Polo Picerija logo">
+      <span data-i18n-lang="sl">Picerija Marco Polo</span>
+      <span data-i18n-lang="en">Marco Polo Pizzeria</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#o-nas" data-i18n-lang="sl">O nas</a><a href="#o-nas" data-i18n-lang="en">About</a></li>
+      <li><a href="#meni" data-i18n-lang="sl">Meni</a><a href="#meni" data-i18n-lang="en">Menu</a></li>
+      <li><a href="#galerija" data-i18n-lang="sl">Galerija</a><a href="#galerija" data-i18n-lang="en">Gallery</a></li>
+      <li><a href="#obisk" data-i18n-lang="sl">Lokacija</a><a href="#obisk" data-i18n-lang="en">Visit</a></li>
+    </ul>
+    <div class="topbar-actions">
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button type="button" data-set-lang="sl" class="active">SL</button>
+        <button type="button" data-set-lang="en">EN</button>
+      </div>
+      <a class="btn small" href="tel:+38640694230">
+        📞 <span class="btn-text" data-i18n-lang="sl">Pokliči</span><span class="btn-text" data-i18n-lang="en">Call</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" id="top">
+  <div class="hero-media">
+    <img src="assets/hero.jpg" alt="Razgled s terase picerije Marco Polo na slovensko podeželje">
+  </div>
+  <div class="hero-inner wrap">
+    <div class="eyebrow" data-i18n-lang="sl">Trebija · Gorenja vas</div>
+    <div class="eyebrow" data-i18n-lang="en">Trebija · Gorenja vas, Slovenia</div>
+
+    <h1 data-i18n-lang="sl">Pica, pečena<br><em>s razgledom</em> na griče.</h1>
+    <h1 data-i18n-lang="en">Pizza, fired up<br><em>with a view</em> of the hills.</h1>
+
+    <p class="hero-sub" data-i18n-lang="sl">Domača picerija na terasi nad dolino — pravi pelati, sveži sir in zrezki, kalamari ter solatni krožniki za vsak dan v tednu.</p>
+    <p class="hero-sub" data-i18n-lang="en">A family pizzeria on a terrace above the valley — real tomato sauce, fresh cheese, steaks, calamari and salad plates, every day of the week.</p>
+
+    <div class="hero-actions">
+      <a class="btn" href="#meni">
+        <span data-i18n-lang="sl">Oglej si meni</span><span data-i18n-lang="en">View the menu</span>
+      </a>
+      <a class="btn ghost" style="color:#fff; border-color:rgba(255,255,255,0.6);" href="#obisk" id="hero-visit-btn">
+        <span data-i18n-lang="sl">Kako do nas</span><span data-i18n-lang="en">Get directions</span>
+      </a>
+    </div>
+
+    <div class="hero-meta">
+      <div>
+        <strong data-i18n-lang="sl">Trebija 19</strong>
+        <strong data-i18n-lang="en">Trebija 19</strong>
+        <span data-i18n-lang="sl">4224 Gorenja vas</span>
+        <span data-i18n-lang="en">4224 Gorenja vas, Slovenia</span>
+      </div>
+      <div>
+        <strong>+386 40 694 230</strong>
+        <span data-i18n-lang="sl">vsak dan</span>
+        <span data-i18n-lang="en">open daily</span>
+      </div>
+      <div>
+        <strong data-i18n-lang="sl">Malice 9€</strong>
+        <strong data-i18n-lang="en">Lunch set €9</strong>
+        <span data-i18n-lang="sl">vse delovne dni, 9–14h</span>
+        <span data-i18n-lang="en">weekdays, 9am–2pm</span>
+      </div>
+    </div>  </div>
+</section>
+
+<!-- ===================== ABOUT ===================== -->
+<section class="about section-pad" id="o-nas">
+  <div class="wrap about-grid">
+    <div class="about-copy reveal">
+      <div class="kicker" data-i18n-lang="sl">Naša zgodba</div>
+      <div class="kicker" data-i18n-lang="en">Our story</div>
+      <h2 style="margin:6px 0 22px; color:var(--pine-deep); font-size:clamp(1.8rem,3.4vw,2.5rem);" data-i18n-lang="sl">Picerija sredi zelenih gričev Selške doline</h2>
+      <h2 style="margin:6px 0 22px; color:var(--pine-deep); font-size:clamp(1.8rem,3.4vw,2.5rem);" data-i18n-lang="en">A pizzeria in the green hills of the Selca Valley</h2>
+
+      <p data-i18n-lang="sl">Marco Polo je picerija in gostilna v Trebiji pri Gorenji vasi, kjer se cestna ovinka sreča s pogledom na griče in domačije. Na pokriti terasi postrežemo pice iz krušne peči, sočne zrezke, kalamare in sveže solatne krožnike.</p>
+      <p data-i18n-lang="en">Marco Polo is a pizzeria and tavern in Trebija near Gorenja vas, where the road bends into a view of green hills and farmhouses. On our covered terrace we serve wood-style pizzas, juicy steaks, calamari and fresh salad plates.</p>
+
+      <p data-i18n-lang="sl">Vsak delovnik med 9. in 14. uro pripravimo tudi malico po dnevnem izboru — odlično postanek za popotnike in domačine na poti skozi dolino.</p>
+      <p data-i18n-lang="en">Every weekday from 9am to 2pm we also prepare a daily lunch menu — a great stop for travellers and locals passing through the valley.</p>
+
+      <div class="pill-row">
+        <div class="pill"><span class="dot"></span><span data-i18n-lang="sl">Pice iz peči</span><span data-i18n-lang="en">Wood-fired pizza</span></div>
+        <div class="pill"><span class="dot"></span><span data-i18n-lang="sl">Sveži kalamari</span><span data-i18n-lang="en">Fresh calamari</span></div>
+        <div class="pill"><span class="dot"></span><span data-i18n-lang="sl">Razgledna terasa</span><span data-i18n-lang="en">Terrace with a view</span></div>
+        <div class="pill"><span class="dot"></span><span data-i18n-lang="sl">Dnevna malica</span><span data-i18n-lang="en">Daily lunch set</span></div>
+      </div>
+    </div>
+    <div class="about-figure reveal">
+      <img src="assets/terrace-portrait.jpg" alt="Miza na terasi picerije Marco Polo s pogledom na dolino">
+    </div>
+  </div>
+</section>
+
+<!-- ===================== MENU NAV ===================== -->
+<nav class="menu-nav" id="menu-nav">
+  <div class="wrap menu-nav-scroll">
+    <a href="#malica" class="chip"><span data-i18n-lang="sl">Malice</span><span data-i18n-lang="en">Lunch</span></a>
+    <a href="#pice" class="chip"><span data-i18n-lang="sl">Pice</span><span data-i18n-lang="en">Pizza</span></a>
+    <a href="#solate" class="chip"><span data-i18n-lang="sl">Solatni krožniki</span><span data-i18n-lang="en">Salad plates</span></a>
+    <a href="#zrezki" class="chip"><span data-i18n-lang="sl">Zrezki &amp; kalamari</span><span data-i18n-lang="en">Steaks &amp; calamari</span></a>
+    <a href="#priloge" class="chip"><span data-i18n-lang="sl">Priloge</span><span data-i18n-lang="en">Sides</span></a>
+    <a href="#juhe" class="chip"><span data-i18n-lang="sl">Juhe &amp; ostalo</span><span data-i18n-lang="en">Soups &amp; more</span></a>
+    <a href="#sladice" class="chip"><span data-i18n-lang="sl">Sladice</span><span data-i18n-lang="en">Desserts</span></a>
+    <a href="#pijace" class="chip"><span data-i18n-lang="sl">Pijače</span><span data-i18n-lang="en">Drinks</span></a>
+  </div>
+</nav>
+
+<!-- ===================== MENU SECTION ===================== -->
+<section class="section-pad" id="meni">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="kicker" data-i18n-lang="sl">Cenik</div>
+        <div class="kicker" data-i18n-lang="en">Price list</div>
+        <h2 data-i18n-lang="sl">Meni</h2>
+        <h2 data-i18n-lang="en">Menu</h2>
+      </div>
+      <p data-i18n-lang="sl">Vse cene so v evrih (€) in vključujejo DDV. Cenik velja od 1. 2. 2026.</p>
+      <p data-i18n-lang="en">All prices are in euros (€) and include VAT. Price list valid from 1 Feb 2026.</p>
+    </div>
+
+    <!-- MALICA banner -->
+    <div class="lunch-banner reveal" id="malica">
+      <div>
+        <h3 data-i18n-lang="sl">Dnevna malica</h3>
+        <h3 data-i18n-lang="en">Daily lunch set</h3>
+        <p data-i18n-lang="sl">Na voljo vse delovne dni od 9. do 14. ure. Izbirate med tremi jedmi dneva, vedno s solato.</p>
+        <p data-i18n-lang="en">Available every weekday, 9am–2pm. Choose from three daily dishes, always served with salad.</p>
+      </div>
+      <div class="lunch-price">9 €<span data-i18n-lang="sl">malica dneva</span><span data-i18n-lang="en">set lunch price</span></div>
+    </div>
+
+    <!-- PICE -->
+    <article class="menu-page reveal" id="pice">
+      <div class="menu-page-head">
+        <span class="script" data-i18n-lang="sl">Pice</span>
+        <span class="script" data-i18n-lang="en">Pizza</span>
+        <span class="menu-page-note" data-i18n-lang="sl">mala / velika / družinska</span>
+        <span class="menu-page-note" data-i18n-lang="en">small / large / family-size</span>
+      </div>
+
+      <div class="menu-cols">
+        <div class="col-head-row">
+          <span></span><span class="menu-col-label" data-i18n-lang="sl">Sestavine</span><span class="menu-col-label" data-i18n-lang="en">Ingredients</span>
+          <span class="price-head" data-i18n-lang="sl">mala</span><span class="price-head" data-i18n-lang="en">small</span>
+          <span class="price-head" data-i18n-lang="sl">velika</span><span class="price-head" data-i18n-lang="en">large</span>
+          <span class="price-head" data-i18n-lang="sl">druž.</span><span class="price-head" data-i18n-lang="en">family</span>
+        </div>
+
+        <!-- rows -->
+        <div class="menu-row"><span class="name">Klasika</span><span class="desc">pelati, šunka, sir, šampinjoni</span><span data-size="s" class="price">9 €</span><span data-size="l" class="price">10,1 €</span><span data-size="f" class="price">27 €</span></div>
+        <div class="menu-row"><span class="name">Margerita</span><span class="desc">pelati, sir</span><span data-size="s" class="price">8,3 €</span><span data-size="l" class="price">8,8 €</span><span data-size="f" class="price">24,5 €</span></div>
+        <div class="menu-row"><span class="name">Kmečka</span><span class="desc">pelati, sir, šampinjoni, čebula, bržola, suha salama, jajce</span><span data-size="s" class="price">9,3 €</span><span data-size="l" class="price">11,3 €</span><span data-size="f" class="price">29 €</span></div>
+        <div class="menu-row"><span class="name">Kraška</span><span class="desc">pelati, sir, šampinjoni, olive, pršut</span><span data-size="s" class="price">9,3 €</span><span data-size="l" class="price">11,3 €</span><span data-size="f" class="price">29 €</span></div>
+        <div class="menu-row"><span class="name">Marco Polo</span><span class="desc">pelati, sir, šunka, šampinjoni, popečena slanina, hren / kisla smetana</span><span data-size="s" class="price">10,3 €</span><span data-size="l" class="price">11,8 €</span><span data-size="f" class="price">30 €</span></div>
+        <div class="menu-row"><span class="name">Tuna</span><span class="desc">pelati, sir, tuna, koruza, čebula</span><span data-size="s" class="price">9,1 €</span><span data-size="l" class="price">10 €</span><span data-size="f" class="price">26,3 €</span></div>
+        <div class="menu-row"><span class="name">Morska</span><span class="desc">pelati, sir, tržaška omaka, morski sadeži</span><span data-size="s" class="price">9,2 €</span><span data-size="l" class="price">10,8 €</span><span data-size="f" class="price">28 €</span></div>
+        <div class="menu-row"><span class="name">Jurček</span><span class="desc">pelati, sir, popečeni jurčki, tržaška omaka</span><span data-size="s" class="price">8,5 €</span><span data-size="l" class="price">9,6 €</span><span data-size="f" class="price">26,3 €</span></div>
+        <div class="menu-row"><span class="name">Štirje siri</span><span class="desc">pelati, štiri vrste sira</span><span data-size="s" class="price">8,7 €</span><span data-size="l" class="price">9,9 €</span><span data-size="f" class="price">25 €</span></div>
+        <div class="menu-row"><span class="name">Vegetarijanska</span><span class="desc">pelati, sir, šampinjoni, sezonska zelenjava</span><span data-size="s" class="price">8,6 €</span><span data-size="l" class="price">10 €</span><span data-size="f" class="price">26,3 €</span></div>
+        <div class="menu-row"><span class="name">Vražja</span><span class="desc">pikantna omaka, sir, šampinjoni, kulen</span><span data-size="s" class="price">8,9 €</span><span data-size="l" class="price">10,3 €</span><span data-size="f" class="price">25,5 €</span></div>
+        <div class="menu-row"><span class="name">Mocarela</span><span class="desc">pelati, sir, mocarela, paradižnik, bazilikin pesto</span><span data-size="s" class="price">9,1 €</span><span data-size="l" class="price">9,2 €</span><span data-size="f" class="price">24 €</span></div>
+        <div class="menu-row"><span class="name">Mehiška</span><span class="desc">pelati, sir, šampinjoni, koruza, fižol, paprika, nacho sir</span><span data-size="s" class="price">9,1 €</span><span data-size="l" class="price">9,2 €</span><span data-size="f" class="price">25 €</span></div>
+        <div class="menu-row"><span class="name">Rukola</span><span class="desc">pelati, sir, parmezan, češnjev paradižnik, rukola</span><span data-size="s" class="price">9 €</span><span data-size="l" class="price">9,8 €</span><span data-size="f" class="price">25 €</span></div>
+        <div class="menu-row"><span class="name" data-i18n-lang="sl">Družinska mešana</span><span class="name" data-i18n-lang="en">Family mixed</span><span class="desc" data-i18n-lang="sl">polovica s šunko, polovica vegetarijanska</span><span class="desc" data-i18n-lang="en">half ham, half vegetarian</span><span data-size="s" class="price dim">—</span><span data-size="l" class="price dim">—</span><span data-size="f" class="price">30 €</span></div>
+        <div class="menu-row"><span class="name">Pol-pol</span><span class="desc" data-i18n-lang="sl">poljubni dve polovici po izbiri</span><span class="desc" data-i18n-lang="en">any two halves of your choice</span><span data-size="s" class="price dim">—</span><span data-size="l" class="price">11 €</span><span data-size="f" class="price dim">—</span></div>
+      </div>
+
+      <div class="menu-foot-note" data-i18n-lang="sl"><strong>Dodatki:</strong> sir, šunka, pršut, slanina in drugi dodatki na voljo posebej (od 1 € do 4 € glede na sestavino) — povprašajte strežno osebje.</div>
+      <div class="menu-foot-note" data-i18n-lang="en"><strong>Extra toppings:</strong> cheese, ham, prosciutto, bacon and more available on request (from €1 to €4 depending on the topping) — just ask your server.</div>
+    </article>
+
+    <!-- SOLATNI KROŽNIKI -->
+    <article class="menu-page reveal" id="solate">
+      <div class="menu-page-head">
+        <span class="script" data-i18n-lang="sl">Solatni krožniki</span>
+        <span class="script" data-i18n-lang="en">Salad plates</span>
+      </div>
+      <div class="menu-cols simple">
+        <div class="menu-row simple">
+          <span class="name">Marco Polo</span>
+          <span class="price">9,2 €</span>
+          <span class="desc">zelena solata, radič, zelje, rukola, koruza, paradižnik, olive, fižol, popečena slanina</span>
+        </div>
+        <div class="menu-row simple">
+          <span class="name" data-i18n-lang="sl">S piščancem na žaru</span><span class="name" data-i18n-lang="en">With grilled chicken</span>
+          <span class="price">9,2 €</span>
+          <span class="desc" data-i18n-lang="sl">zelena solata, radič, zelje, rukola, koruza, sir, popečen piščanec z bučkami in papriko, curry</span>
+          <span class="desc" data-i18n-lang="en">lettuce, radicchio, cabbage, rocket, corn, cheese, seared chicken with courgette, pepper and curry</span>
+        </div>
+        <div class="menu-row simple">
+          <span class="name" data-i18n-lang="sl">Z ocvrtim piščancem</span><span class="name" data-i18n-lang="en">With fried chicken</span>
+          <span class="price">9,3 €</span>
+          <span class="desc" data-i18n-lang="sl">zelena solata, radič, zelje, rukola, koruza, paradižnik, ocvrt piščanec</span>
+          <span class="desc" data-i18n-lang="en">lettuce, radicchio, cabbage, rocket, corn, tomato, fried chicken</span>
+        </div>
+        <div class="menu-row simple">
+          <span class="name" data-i18n-lang="sl">S popečeno zelenjavo</span><span class="name" data-i18n-lang="en">With seared vegetables</span>
+          <span class="price">8,5 €</span>
+          <span class="desc" data-i18n-lang="sl">zelena solata, radič, zelje, rukola, koruza, paradižnik, popečena zelenjava</span>
+          <span class="desc" data-i18n-lang="en">lettuce, radicchio, cabbage, rocket, corn, tomato, seared vegetables</span>
+        </div>
+        <div class="menu-row simple">
+          <span class="name" data-i18n-lang="sl">Z ocvrto zelenjavo</span><span class="name" data-i18n-lang="en">With fried vegetables</span>
+          <span class="price">9 €</span>
+          <span class="desc" data-i18n-lang="sl">zelena solata, radič, zelje, rukola, koruza, paradižnik, ocvrta zelenjava</span>
+          <span class="desc" data-i18n-lang="en">lettuce, radicchio, cabbage, rocket, corn, tomato, fried vegetables</span>
+        </div>
+        <div class="menu-row simple">
+          <span class="name" data-i18n-lang="sl">S tuno</span><span class="name" data-i18n-lang="en">With tuna</span>
+          <span class="price">8,6 €</span>
+          <span class="desc" data-i18n-lang="sl">zelena solata, radič, zelje, rukola, koruza, paradižnik, tuna</span>
+          <span class="desc" data-i18n-lang="en">lettuce, radicchio, cabbage, rocket, corn, tomato, tuna</span>
+        </div>
+        <div class="menu-row simple">
+          <span class="name" data-i18n-lang="sl">S šunko in sirom</span><span class="name" data-i18n-lang="en">With ham and cheese</span>
+          <span class="price">8,8 €</span>
+          <span class="desc" data-i18n-lang="sl">zelena solata, radič, zelje, rukola, koruza, paradižnik, olive, fižol, šunka, sir</span>
+          <span class="desc" data-i18n-lang="en">lettuce, radicchio, cabbage, rocket, corn, tomato, olives, beans, ham, cheese</span>
+        </div>
+      </div>
+      <div class="menu-foot-note" data-i18n-lang="sl">+ tatarski ali jogurtov preliv po izbiri.</div>
+      <div class="menu-foot-note" data-i18n-lang="en">+ choice of tartare or yoghurt dressing.</div>
+    </article>
+
+    <!-- ZREZKI & KALAMARI -->
+    <article class="menu-page reveal" id="zrezki">
+      <div class="menu-page-head">
+        <span class="script" data-i18n-lang="sl">Zrezki</span>
+        <span class="script" data-i18n-lang="en">Steaks</span>
+        <span class="menu-page-note" data-i18n-lang="sl">svinjski / piščančji</span>
+        <span class="menu-page-note" data-i18n-lang="en">pork / chicken</span>
+      </div>
+      <div class="menu-cols simple">
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Zrezek na žaru s prilogo</span><span class="name" data-i18n-lang="en">Grilled steak with a side</span><span class="price">14,7 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Zrezek po dunajsko s prilogo</span><span class="name" data-i18n-lang="en">Wiener-style steak with a side</span><span class="price">14,7 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Zrezek po pariško s prilogo</span><span class="name" data-i18n-lang="en">Paris-style steak with a side</span><span class="price">14,7 €</span></div>
+        <div class="menu-row simple">
+          <span class="name" data-i18n-lang="sl">Zrezek v omaki s prilogo</span><span class="name" data-i18n-lang="en">Steak in sauce with a side</span>
+          <span class="price">14,7 €</span>
+          <span class="desc" data-i18n-lang="sl">v naravni / smetanovi / gobovi omaki (+1,5 €)</span>
+          <span class="desc" data-i18n-lang="en">in natural / cream / mushroom sauce (+€1.5)</span>
+        </div>
+      </div>
+      <div class="menu-foot-note" data-i18n-lang="sl"><strong>Priloga po izbiri:</strong> pomfri / ocvrt krompirček / ocvrtki. Menjava priloge se dodatno zaračuna (+2 €).</div>
+      <div class="menu-foot-note" data-i18n-lang="en"><strong>Choice of side:</strong> fries / fried potatoes / battered vegetable strips. Swapping the side is charged extra (+€2).</div>
+
+      <div class="menu-page-head" style="margin-top:36px;">
+        <span class="script" data-i18n-lang="sl">Kalamari</span>
+        <span class="script" data-i18n-lang="en">Calamari</span>
+      </div>
+      <div class="menu-cols simple">
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Kalamari na žaru s prilogo</span><span class="name" data-i18n-lang="en">Grilled calamari with a side</span><span class="desc" data-i18n-lang="sl">tržaška omaka</span><span class="desc" data-i18n-lang="en">Trieste-style sauce</span><span class="price">15 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Ocvrti kalamari s prilogo</span><span class="name" data-i18n-lang="en">Fried calamari with a side</span><span class="desc" data-i18n-lang="sl">tatarska omaka</span><span class="desc" data-i18n-lang="en">tartare sauce</span><span class="price">15 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Frigani kalamari s prilogo</span><span class="name" data-i18n-lang="en">Lightly fried "frigani" calamari with a side</span><span class="desc" data-i18n-lang="sl">tatarska omaka</span><span class="desc" data-i18n-lang="en">tartare sauce</span><span class="price">14,5 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Polnjeni kalamari na žaru s prilogo</span><span class="name" data-i18n-lang="en">Grilled stuffed calamari with a side</span><span class="desc" data-i18n-lang="sl">tržaška omaka</span><span class="desc" data-i18n-lang="en">Trieste-style sauce</span><span class="price">15,5 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Polnjeni ocvrti kalamari s prilogo</span><span class="name" data-i18n-lang="en">Fried stuffed calamari with a side</span><span class="desc" data-i18n-lang="sl">tatarska omaka</span><span class="desc" data-i18n-lang="en">tartare sauce</span><span class="price">16 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Mešani kalamari s prilogo</span><span class="name" data-i18n-lang="en">Mixed calamari with a side</span><span class="desc" data-i18n-lang="sl">tatarska in tržaška omaka</span><span class="desc" data-i18n-lang="en">tartare and Trieste-style sauce</span><span class="price">16,8 €</span></div>
+      </div>
+    </article>
+
+    <!-- PRILOGE & SOLATE -->
+    <article class="menu-page reveal" id="priloge">
+      <div class="menu-page-head">
+        <span class="script" data-i18n-lang="sl">Priloge</span>
+        <span class="script" data-i18n-lang="en">Side dishes</span>
+      </div>
+      <div class="menu-cols simple">
+        <div class="menu-row simple"><span class="name">Pomfri</span><span class="price">3,8 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Ocvrt krompirček</span><span class="name" data-i18n-lang="en">Fried potatoes</span><span class="price">3,8 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Pražen krompir</span><span class="name" data-i18n-lang="en">Roasted potatoes</span><span class="price">4 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Ocvrtki</span><span class="name" data-i18n-lang="en">Battered vegetable strips</span><span class="price">3,2 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Riž</span><span class="name" data-i18n-lang="en">Rice</span><span class="price">4,3 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Kuhana zelenjava</span><span class="name" data-i18n-lang="en">Boiled vegetables</span><span class="price">4,8 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Pečena zelenjava</span><span class="name" data-i18n-lang="en">Roasted vegetables</span><span class="price">4,8 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Sirovi štruklji</span><span class="name" data-i18n-lang="en">Cheese dumplings (štruklji)</span><span class="price">4,8 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Idrijski žlikrofi</span><span class="name" data-i18n-lang="en">Idrija-style potato dumplings</span><span class="price dim">—</span></div>
+      </div>
+
+      <div class="menu-page-head" style="margin-top:36px;">
+        <span class="script" data-i18n-lang="sl">Solate</span>
+        <span class="script" data-i18n-lang="en">Salads</span>
+      </div>
+      <div class="menu-cols simple">
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Mešana solata</span><span class="name" data-i18n-lang="en">Mixed salad</span><span class="price">3,6 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Zelena solata</span><span class="name" data-i18n-lang="en">Green salad</span><span class="price">3,3 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Zelje</span><span class="name" data-i18n-lang="en">Cabbage salad</span><span class="price">3,6 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Paradižnikova solata</span><span class="name" data-i18n-lang="en">Tomato salad</span><span class="price">4 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Rdeča pesa</span><span class="name" data-i18n-lang="en">Beetroot salad</span><span class="price">3,5 €</span></div>
+      </div>
+    </article>
+
+    <!-- JUHE & OSTALE JEDI -->
+    <article class="menu-page reveal" id="juhe">
+      <div class="menu-page-head">
+        <span class="script" data-i18n-lang="sl">Juhe</span>
+        <span class="script" data-i18n-lang="en">Soups</span>
+      </div>
+      <div class="menu-cols simple">
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Goveja</span><span class="name" data-i18n-lang="en">Beef broth</span><span class="price">4 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Dnevna</span><span class="name" data-i18n-lang="en">Soup of the day</span><span class="price">4,2 €</span></div>
+      </div>
+
+      <div class="menu-page-head" style="margin-top:36px;">
+        <span class="script" data-i18n-lang="sl">Ostale jedi</span>
+        <span class="script" data-i18n-lang="en">Other dishes</span>
+      </div>
+      <div class="menu-cols simple">
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Ocvrt sir s pomfrijem</span><span class="name" data-i18n-lang="en">Fried cheese with fries</span><span class="desc" data-i18n-lang="sl">tatarska omaka</span><span class="desc" data-i18n-lang="en">tartare sauce</span><span class="price">10,5 €</span></div>
+        <div class="menu-row simple">
+          <span class="name" data-i18n-lang="sl">Idrijski žlikrofi z omako</span><span class="name" data-i18n-lang="en">Idrija dumplings with sauce</span>
+          <span class="desc" data-i18n-lang="sl">pečenkina / smetanova / gobova (+1,5 €)</span>
+          <span class="desc" data-i18n-lang="en">roast / cream / mushroom (+€1.5)</span>
+          <span class="price">11 €</span>
+        </div>
+        <div class="menu-row simple">
+          <span class="name" data-i18n-lang="sl">Njoki z omako</span><span class="name" data-i18n-lang="en">Gnocchi with sauce</span>
+          <span class="desc" data-i18n-lang="sl">smetanova / s tartufato / gobova (+1,5 €)</span>
+          <span class="desc" data-i18n-lang="en">cream / truffle / mushroom (+€1.5)</span>
+          <span class="price">10 €</span>
+        </div>
+        <div class="menu-row simple">
+          <span class="name" data-i18n-lang="sl">Vegi krožnik</span><span class="name" data-i18n-lang="en">Vegetarian plate</span>
+          <span class="desc" data-i18n-lang="sl">sojin polpet, štruklji, kuhana in pečena zelenjava, ocvrtki</span>
+          <span class="desc" data-i18n-lang="en">soy patty, dumplings, boiled and roasted vegetables, battered vegetable strips</span>
+          <span class="price">11,5 €</span>
+        </div>
+        <div class="menu-row simple">
+          <span class="name" data-i18n-lang="sl">Nedeljsko kosilo</span><span class="name" data-i18n-lang="en">Sunday lunch</span>
+          <span class="desc" data-i18n-lang="sl">na voljo ob sobotah, nedeljah in praznikih do 17h</span>
+          <span class="desc" data-i18n-lang="en">available Saturdays, Sundays and holidays until 5pm</span>
+          <span class="price">19 €</span>
+        </div>
+        <div class="menu-row simple">
+          <span class="name" data-i18n-lang="sl">Malica</span><span class="name" data-i18n-lang="en">Lunch set</span>
+          <span class="desc" data-i18n-lang="sl">na voljo vse delovne dni od 10h do 14h</span>
+          <span class="desc" data-i18n-lang="en">available weekdays, 10am–2pm</span>
+          <span class="price">9 €</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- SLADICE -->
+    <article class="menu-page reveal" id="sladice">
+      <div class="menu-page-head">
+        <span class="script" data-i18n-lang="sl">Sladice</span>
+        <span class="script" data-i18n-lang="en">Desserts</span>
+      </div>
+      <div class="menu-cols simple">
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Dnevna sladica</span><span class="name" data-i18n-lang="en">Dessert of the day</span><span class="price">3,5 €</span></div>
+        <div class="menu-row simple"><span class="name">Palačinke</span><span class="desc" data-i18n-lang="sl">z nutello / marmelado / orehi</span><span class="desc" data-i18n-lang="en">with Nutella / jam / walnuts</span><span class="price">4,2 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Sladki štruklji</span><span class="name" data-i18n-lang="en">Sweet štruklji dumplings</span><span class="desc" data-i18n-lang="sl">skutni</span><span class="desc" data-i18n-lang="en">with cottage cheese filling</span><span class="price">4,5 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Sladoled</span><span class="name" data-i18n-lang="en">Ice cream</span><span class="desc" data-i18n-lang="sl">kepica</span><span class="desc" data-i18n-lang="en">per scoop</span><span class="price">2 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Ledena kava</span><span class="name" data-i18n-lang="en">Iced coffee</span><span class="price">4 €</span></div>
+      </div>
+      <div class="menu-foot-note" data-i18n-lang="sl">Seznam alergenov dobite pri strežnem osebju.</div>
+      <div class="menu-foot-note" data-i18n-lang="en">An allergen list is available from our staff.</div>
+    </article>
+
+    <!-- PIJAČE -->
+    <article class="menu-page reveal" id="pijace">
+      <div class="menu-page-head">
+        <span class="script" data-i18n-lang="sl">Pijače</span>
+        <span class="script" data-i18n-lang="en">Drinks</span>
+      </div>
+
+      <div class="menu-page-head" style="border-bottom:none; padding-bottom:0; margin-bottom:0;">
+        <span style="font-family:'Fraunces',serif; font-weight:600; font-size:1.1rem; color:var(--ink);" data-i18n-lang="sl">Pivo</span>
+        <span style="font-family:'Fraunces',serif; font-weight:600; font-size:1.1rem; color:var(--ink);" data-i18n-lang="en">Beer</span>
+      </div>
+      <div class="menu-cols simple">
+        <div class="menu-row simple"><span class="name">Laško 0,5 l</span><span class="price">2,80 €</span></div>
+        <div class="menu-row simple"><span class="name">Laško 0,33 l</span><span class="price">2,60 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Laško brezalkoholno 0,5 l</span><span class="name" data-i18n-lang="en">Laško non-alcoholic 0.5 l</span><span class="price">2,70 €</span></div>
+        <div class="menu-row simple"><span class="name">Union 0,5 l</span><span class="price">2,80 €</span></div>
+        <div class="menu-row simple"><span class="name">Union 0,33 l</span><span class="price">2,60 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Union brezalkoholno 0,5 l</span><span class="name" data-i18n-lang="en">Union non-alcoholic 0.5 l</span><span class="price">2,70 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Union točeno 0,5 l</span><span class="name" data-i18n-lang="en">Union draught 0.5 l</span><span class="price">3,00 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Union točeno 0,3 l</span><span class="name" data-i18n-lang="en">Union draught 0.3 l</span><span class="price">2,70 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Union točeno 0,2 l</span><span class="name" data-i18n-lang="en">Union draught 0.2 l</span><span class="price">2,30 €</span></div>
+        <div class="menu-row simple"><span class="name">Disel 0,5 l</span><span class="price">2,90 €</span></div>
+        <div class="menu-row simple"><span class="name">Disel 0,3 l</span><span class="price">2,70 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Kozel temno 0,5 l</span><span class="name" data-i18n-lang="en">Kozel dark 0.5 l</span><span class="price">2,90 €</span></div>
+        <div class="menu-row simple"><span class="name">Radler 0,5 l</span><span class="price">2,70 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Radler brezalkoholno 0,5 l</span><span class="name" data-i18n-lang="en">Radler non-alcoholic 0.5 l</span><span class="price">2,60 €</span></div>
+        <div class="menu-row simple"><span class="name">Malt 0,5 l</span><span class="price">2,70 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Radler temno 0,5 l</span><span class="name" data-i18n-lang="en">Radler dark 0.5 l</span><span class="price">3,00 €</span></div>
+      </div>
+
+      <div class="menu-page-head" style="border-bottom:none; padding-bottom:0; margin:30px 0 0;">
+        <span style="font-family:'Fraunces',serif; font-weight:600; font-size:1.1rem; color:var(--ink);" data-i18n-lang="sl">Vino 0,1 l</span>
+        <span style="font-family:'Fraunces',serif; font-weight:600; font-size:1.1rem; color:var(--ink);" data-i18n-lang="en">Wine 0.1 l</span>
+      </div>
+      <div class="menu-cols simple">
+        <div class="menu-row simple"><span class="name">Haložan</span><span class="price">1,50 €</span></div>
+        <div class="menu-row simple"><span class="name">Malvazija</span><span class="price">1,50 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Štajersko belo</span><span class="name" data-i18n-lang="en">Štajersko white</span><span class="price">1,50 €</span></div>
+        <div class="menu-row simple"><span class="name">Janževec</span><span class="price">1,50 €</span></div>
+        <div class="menu-row simple"><span class="name">Cviček</span><span class="price">1,50 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Modra frankinja</span><span class="name" data-i18n-lang="en">Blaufränkisch</span><span class="price">1,50 €</span></div>
+        <div class="menu-row simple"><span class="name">Refošk</span><span class="price">1,50 €</span></div>
+        <div class="menu-row simple"><span class="name">Cabernet Sauvignon</span><span class="price">1,50 €</span></div>
+      </div>
+
+      <div class="menu-page-head" style="border-bottom:none; padding-bottom:0; margin:30px 0 0;">
+        <span style="font-family:'Fraunces',serif; font-weight:600; font-size:1.1rem; color:var(--ink);" data-i18n-lang="sl">Žgane pijače</span>
+        <span style="font-family:'Fraunces',serif; font-weight:600; font-size:1.1rem; color:var(--ink);" data-i18n-lang="en">Spirits</span>
+      </div>
+      <div class="menu-cols spirits">
+        <div class="col-head-row">
+          <span></span>
+          <span class="price-head">0,03 l</span>
+          <span class="price-head">0,05 l</span>
+        </div>
+        <div class="menu-row spirits-row"><span class="name">Sadjevec</span><span class="price" data-size="sm">1,90 €</span><span class="price" data-size="lg">2,10 €</span></div>
+        <div class="menu-row spirits-row"><span class="name">Pelinkovec</span><span class="price" data-size="sm">2,10 €</span><span class="price" data-size="lg">2,40 €</span></div>
+        <div class="menu-row spirits-row"><span class="name">Travarica</span><span class="price" data-size="sm">2,10 €</span><span class="price" data-size="lg">2,40 €</span></div>
+        <div class="menu-row spirits-row"><span class="name">Rum</span><span class="price" data-size="sm">2,10 €</span><span class="price" data-size="lg">2,40 €</span></div>
+        <div class="menu-row spirits-row"><span class="name">Vodka</span><span class="price" data-size="sm">2,00 €</span><span class="price" data-size="lg">2,80 €</span></div>
+        <div class="menu-row spirits-row"><span class="name">Limonce</span><span class="price" data-size="sm">2,00 €</span><span class="price" data-size="lg">2,40 €</span></div>
+        <div class="menu-row spirits-row"><span class="name">Borovničke</span><span class="price" data-size="sm">2,00 €</span><span class="price" data-size="lg">2,40 €</span></div>
+        <div class="menu-row spirits-row"><span class="name">Malince</span><span class="price" data-size="sm">2,00 €</span><span class="price" data-size="lg">2,40 €</span></div>
+        <div class="menu-row spirits-row"><span class="name">Smrekovec</span><span class="price" data-size="sm">2,00 €</span><span class="price" data-size="lg">2,40 €</span></div>
+        <div class="menu-row spirits-row"><span class="name" data-i18n-lang="sl">Vodka črna</span><span class="name" data-i18n-lang="en">Vodka, black</span><span class="price" data-size="sm">2,00 €</span><span class="price" data-size="lg">2,30 €</span></div>
+        <div class="menu-row spirits-row"><span class="name">Viski <em style="font-style:italic; font-weight:400; font-size:0.85em;">(Jameson / Jack Daniels)</em></span><span class="price" data-size="sm">3,40 €</span><span class="price dim" data-size="lg">—</span></div>
+        <div class="menu-row spirits-row"><span class="name">Viljamovka</span><span class="price" data-size="sm">3,20 €</span><span class="price dim" data-size="lg">—</span></div>
+        <div class="menu-row spirits-row"><span class="name">Jägermeister</span><span class="price" data-size="sm">2,80 €</span><span class="price dim" data-size="lg">—</span></div>
+        <div class="menu-row spirits-row"><span class="name">Malibu</span><span class="price" data-size="sm">2,60 €</span><span class="price dim" data-size="lg">—</span></div>
+        <div class="menu-row spirits-row"><span class="name">Tekila</span><span class="price" data-size="sm">2,80 €</span><span class="price dim" data-size="lg">—</span></div>
+        <div class="menu-row spirits-row"><span class="name">Gin</span><span class="price" data-size="sm">2,50 €</span><span class="price dim" data-size="lg">—</span></div>
+        <div class="menu-row spirits-row"><span class="name">Stock</span><span class="price" data-size="sm">2,50 €</span><span class="price dim" data-size="lg">—</span></div>
+        <div class="menu-row spirits-row"><span class="name">Cynar</span><span class="price" data-size="sm">2,20 €</span><span class="price dim" data-size="lg">—</span></div>
+        <div class="menu-row spirits-row"><span class="name">Brinjevec</span><span class="price" data-size="sm">3,10 €</span><span class="price dim" data-size="lg">—</span></div>
+      </div>
+
+      <div class="menu-page-head" style="border-bottom:none; padding-bottom:0; margin:30px 0 0;">
+        <span style="font-family:'Fraunces',serif; font-weight:600; font-size:1.1rem; color:var(--ink);" data-i18n-lang="sl">Brezalkoholne pijače</span>
+        <span style="font-family:'Fraunces',serif; font-weight:600; font-size:1.1rem; color:var(--ink);" data-i18n-lang="en">Soft drinks</span>
+      </div>
+      <div class="menu-cols simple">
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Sok točeni 0,1 l</span><span class="name" data-i18n-lang="en">Fresh juice 0.1 l</span><span class="desc" data-i18n-lang="sl">jabolko / pomaranča / jagoda / breskev</span><span class="desc" data-i18n-lang="en">apple / orange / strawberry / peach</span><span class="price">1,30 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Radenska steklenica 0,25 l</span><span class="name" data-i18n-lang="en">Radenska bottle 0.25 l</span><span class="price">2,30 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Radenska steklenica 0,5 l</span><span class="name" data-i18n-lang="en">Radenska bottle 0.5 l</span><span class="price">3,00 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Radenska z okusom 0,25 l</span><span class="name" data-i18n-lang="en">Radenska flavoured 0.25 l</span><span class="price">2,00 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Radenska točeno 0,1 l</span><span class="name" data-i18n-lang="en">Radenska draught 0.1 l</span><span class="price">0,90 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Ledeni čaj breskev 0,5 l</span><span class="name" data-i18n-lang="en">Iced tea, peach 0.5 l</span><span class="price">2,80 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Voda z okusom 0,5 l</span><span class="name" data-i18n-lang="en">Flavoured water 0.5 l</span><span class="price">2,80 €</span></div>
+        <div class="menu-row simple"><span class="name">Coca Cola 0,25 l</span><span class="price">2,80 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Coca Cola točeno 0,1 l</span><span class="name" data-i18n-lang="en">Coca Cola draught 0.1 l</span><span class="price">1,30 €</span></div>
+        <div class="menu-row simple"><span class="name">Fanta 0,25 l</span><span class="price">2,80 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Fanta točeno 0,1 l</span><span class="name" data-i18n-lang="en">Fanta draught 0.1 l</span><span class="price">1,30 €</span></div>
+        <div class="menu-row simple"><span class="name">Schweppes 0,25 l</span><span class="desc" data-i18n-lang="sl">bitter lemon / tangerine / tonic</span><span class="desc" data-i18n-lang="en">bitter lemon / tangerine / tonic</span><span class="price">2,80 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Schweppes točeno 0,1 l</span><span class="name" data-i18n-lang="en">Schweppes draught 0.1 l</span><span class="price">1,30 €</span></div>
+        <div class="menu-row simple"><span class="name">Cocta 0,25 l</span><span class="price">2,80 €</span></div>
+        <div class="menu-row simple"><span class="name">Cedevita</span><span class="price">2,30 €</span></div>
+        <div class="menu-row simple"><span class="name">Red Bull</span><span class="price">3,00 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Domača limonada 0,3 l</span><span class="name" data-i18n-lang="en">Homemade lemonade 0.3 l</span><span class="desc" data-i18n-lang="sl">različni okusi</span><span class="desc" data-i18n-lang="en">various flavours</span><span class="price">3,20 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Domača limonada 0,5 l</span><span class="name" data-i18n-lang="en">Homemade lemonade 0.5 l</span><span class="desc" data-i18n-lang="sl">različni okusi</span><span class="desc" data-i18n-lang="en">various flavours</span><span class="price">3,70 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Hišni ledeni čaj 0,3 l</span><span class="name" data-i18n-lang="en">House iced tea 0.3 l</span><span class="desc" data-i18n-lang="sl">različni okusi</span><span class="desc" data-i18n-lang="en">various flavours</span><span class="price">3,20 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Hišni ledeni čaj 0,5 l</span><span class="name" data-i18n-lang="en">House iced tea 0.5 l</span><span class="desc" data-i18n-lang="sl">različni okusi</span><span class="desc" data-i18n-lang="en">various flavours</span><span class="price">3,70 €</span></div>
+      </div>
+
+      <div class="menu-page-head" style="border-bottom:none; padding-bottom:0; margin:30px 0 0;">
+        <span style="font-family:'Fraunces',serif; font-weight:600; font-size:1.1rem; color:var(--ink);" data-i18n-lang="sl">Topli napitki &amp; kava</span>
+        <span style="font-family:'Fraunces',serif; font-weight:600; font-size:1.1rem; color:var(--ink);" data-i18n-lang="en">Hot drinks &amp; coffee</span>
+      </div>
+      <div class="menu-cols simple">
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Čaj</span><span class="name" data-i18n-lang="en">Tea</span><span class="price">1,70 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Čaj z medom in limono</span><span class="name" data-i18n-lang="en">Tea with honey and lemon</span><span class="price">2,20 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Vroča čokolada</span><span class="name" data-i18n-lang="en">Hot chocolate</span><span class="desc" data-i18n-lang="sl">temna / bela / kokos</span><span class="desc" data-i18n-lang="en">dark / white / coconut</span><span class="price">3,50 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Kakav</span><span class="name" data-i18n-lang="en">Cocoa</span><span class="price">2,10 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Kuhano vino</span><span class="name" data-i18n-lang="en">Mulled wine</span><span class="price">3,20 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Kava</span><span class="name" data-i18n-lang="en">Coffee</span><span class="price">1,40 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Kava z mlekom</span><span class="name" data-i18n-lang="en">Coffee with milk</span><span class="price">1,70 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Kava z rastlinskim mlekom</span><span class="name" data-i18n-lang="en">Coffee with plant milk</span><span class="price">2,20 €</span></div>
+        <div class="menu-row simple"><span class="name">Cappuccino</span><span class="price">1,70 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Kava s smetano</span><span class="name" data-i18n-lang="en">Coffee with cream</span><span class="price">1,80 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Bela kava</span><span class="name" data-i18n-lang="en">White coffee</span><span class="price">2,00 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Ječmenova kava</span><span class="name" data-i18n-lang="en">Barley coffee</span><span class="price">1,90 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Ječmenova kava z mlekom</span><span class="name" data-i18n-lang="en">Barley coffee with milk</span><span class="price">2,20 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Brezkofeinska kava</span><span class="name" data-i18n-lang="en">Decaf coffee</span><span class="price">1,00 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Brezkofeinska kava z mlekom</span><span class="name" data-i18n-lang="en">Decaf coffee with milk</span><span class="price">2,20 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Dodatek smetana</span><span class="name" data-i18n-lang="en">Extra cream</span><span class="price">0,40 €</span></div>
+        <div class="menu-row simple"><span class="name" data-i18n-lang="sl">Lonček "to go"</span><span class="name" data-i18n-lang="en">"To go" cup</span><span class="price">0,20 €</span></div>
+      </div>
+
+      <div class="menu-page-head" style="border-bottom:none; padding-bottom:0; margin:30px 0 0;">
+        <span style="font-family:'Fraunces',serif; font-weight:600; font-size:1.1rem; color:var(--ink);" data-i18n-lang="sl">Koktejli</span>
+        <span style="font-family:'Fraunces',serif; font-weight:600; font-size:1.1rem; color:var(--ink);" data-i18n-lang="en">Cocktails</span>
+      </div>
+      <div class="menu-cols simple">
+        <div class="menu-row simple"><span class="name">Gin Tonic</span><span class="price">4,50 €</span></div>
+        <div class="menu-row simple"><span class="name">Piña Colada</span><span class="price">5,50 €</span></div>
+        <div class="menu-row simple"><span class="name">Mojito</span><span class="price">4,80 €</span></div>
+        <div class="menu-row simple"><span class="name">Tequila Sunrise</span><span class="price">5,50 €</span></div>
+        <div class="menu-row simple"><span class="name">Slemer</span><span class="price">3,00 €</span></div>
+      </div>
+
+      <div class="menu-foot-note" data-i18n-lang="sl">Mladoletnim in vinjenim osebam ne strežemo alkohola.</div>
+      <div class="menu-foot-note" data-i18n-lang="en">We do not serve alcohol to minors or intoxicated guests.</div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ===================== GALLERY ===================== -->
+<section class="section-pad" id="galerija" style="background:var(--cream-soft);">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="kicker" data-i18n-lang="sl">Pogled na dolino</div>
+        <div class="kicker" data-i18n-lang="en">A view of the valley</div>
+        <h2 data-i18n-lang="sl">Galerija</h2>
+        <h2 data-i18n-lang="en">Gallery</h2>
+      </div>
+      <p data-i18n-lang="sl">Pokrita terasa, razgled na griče Selške doline in stavba picerije v Trebiji.</p>
+      <p data-i18n-lang="en">Our covered terrace, the view over the hills of the Selca Valley, and the pizzeria building in Trebija.</p>
+    </div>
+    <div class="gallery-strip reveal">
+      <figure><img src="assets/hero.jpg" alt="Razgled s terase na griče"></figure>
+      <figure><img src="assets/terrace-portrait.jpg" alt="Miza na terasi picerije"></figure>
+      <figure><img src="assets/building.jpg" alt="Stavba picerije Marco Polo v Trebiji"></figure>
+      <figure><img src="assets/logo.png" style="object-fit:contain; background:#fff; padding:30px;" alt="Logotip picerije Marco Polo"></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== VISIT / LOCATION ===================== -->
+<section class="visit section-pad" id="obisk">
+  <div class="wrap">
+    <div class="kicker" data-i18n-lang="sl">Najdete nas v Trebiji</div>
+    <div class="kicker" data-i18n-lang="en">Find us in Trebija</div>
+    <h2 style="margin:6px 0 40px; font-size:clamp(1.9rem,4vw,2.7rem);" data-i18n-lang="sl">Kako do nas</h2>
+    <h2 style="margin:6px 0 40px; font-size:clamp(1.9rem,4vw,2.7rem);" data-i18n-lang="en">Visit &amp; contact</h2>
+
+    <div class="visit-grid">
+      <div class="visit-info reveal">
+        <p data-i18n-lang="sl">Picerija Marco Polo stoji ob glavni cesti skozi Trebijo, le streljaj od Gorenje vasi — lahko dostopna z avtom, s parkiriščem tik pred vrati.</p>
+        <p data-i18n-lang="en">Marco Polo Pizzeria sits right on the main road through Trebija, just outside Gorenja vas — easy to reach by car, with parking right outside.</p>
+
+        <ul class="info-list">
+          <li>
+            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 1 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
+            <div>
+              <div class="label" data-i18n-lang="sl">Naslov</div>
+              <div class="label" data-i18n-lang="en">Address</div>
+              <a class="value" href="https://maps.app.goo.gl/UxaxSMwpL1Dotq499?g_st=ic" target="_blank" rel="noopener">Trebija 19, 4224 Gorenja vas, Slovenija</a>
+            </div>
+          </li>
+          <li>
+            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92Z"/></svg></span>
+            <div>
+              <div class="label" data-i18n-lang="sl">Telefon</div>
+              <div class="label" data-i18n-lang="en">Phone</div>
+              <a class="value" href="tel:+38640694230">+386 40 694 230</a>
+            </div>
+          </li>
+          <li>
+            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>
+            <div>
+              <div class="label" data-i18n-lang="sl">Odpiralni čas</div>
+              <div class="label" data-i18n-lang="en">Opening hours</div>
+              <table class="hours-table">
+                <tr><td data-i18n-lang="sl">Ponedeljek</td><td data-i18n-lang="en">Monday</td><td>06:00–22:00</td></tr>
+                <tr><td data-i18n-lang="sl">Torek</td><td data-i18n-lang="en">Tuesday</td><td>06:00–22:00</td></tr>
+                <tr class="today"><td data-i18n-lang="sl">Sreda</td><td data-i18n-lang="en">Wednesday</td><td>06:00–22:00</td></tr>
+                <tr><td data-i18n-lang="sl">Četrtek</td><td data-i18n-lang="en">Thursday</td><td>06:00–22:00</td></tr>
+                <tr><td data-i18n-lang="sl">Petek</td><td data-i18n-lang="en">Friday</td><td>06:00–01:00</td></tr>
+                <tr><td data-i18n-lang="sl">Sobota</td><td data-i18n-lang="en">Saturday</td><td>07:00–01:00</td></tr>
+                <tr><td data-i18n-lang="sl">Nedelja</td><td data-i18n-lang="en">Sunday</td><td>09:00–22:00</td></tr>
+              </table>
+            </div>
+          </li>
+        </ul>
+
+        <div class="social-row">
+          <a class="social-btn" href="https://www.facebook.com/share/1GnNXykYs5/?mibextid=wwXIfr" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06C2 17.06 5.66 21.2 10.44 22v-7.02H7.9v-2.92h2.54V9.84c0-2.5 1.49-3.89 3.78-3.89 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.87h2.78l-.45 2.92h-2.33V22C18.34 21.2 22 17.06 22 12.06Z"/></svg>
+            Facebook
+          </a>
+          <a class="btn" href="https://maps.app.goo.gl/UxaxSMwpL1Dotq499?g_st=ic" target="_blank" rel="noopener">
+            <span data-i18n-lang="sl">Odpri zemljevid</span><span data-i18n-lang="en">Open in Maps</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <div class="map-wrap">
+          <iframe
+            src="https://www.google.com/maps?q=Trebija+19,+4224+Gorenja+vas,+Slovenia&output=embed"
+            allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            title="Zemljevid lokacije picerije Marco Polo"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="assets/logo.png" alt="Marco Polo logo">
+      </div>
+      <div class="legal" data-i18n-lang="sl">
+        Picerija Marko Polo, Bojan Čemažar s.p. · Trebija 19, 4224 Gorenja vas · Davčna št.: 43530940 · Matična številka: 8377898000 · Direktor: Bojan Čemažar
+      </div>
+      <div class="legal" data-i18n-lang="en">
+        Picerija Marko Polo, Bojan Čemažar s.p. · Trebija 19, 4224 Gorenja vas, Slovenia · Tax No.: 43530940 · Registration No.: 8377898000 · Director: Bojan Čemažar
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Marco Polo Picerija</span>
+      <span>
+        <a href="tel:+38640694230">+386 40 694 230</a> ·
+        <a href="https://www.facebook.com/share/1GnNXykYs5/?mibextid=wwXIfr" target="_blank" rel="noopener">Facebook</a> ·
+        <a href="https://maps.app.goo.gl/UxaxSMwpL1Dotq499?g_st=ic" target="_blank" rel="noopener">Google Maps</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<button class="back-to-top" id="backTop" aria-label="Back to top">↑</button>
+
+<script>
+  // Language toggle
+  const langButtons = document.querySelectorAll('[data-set-lang]');
+  function setLang(lang){
+    document.documentElement.setAttribute('data-lang', lang);
+    langButtons.forEach(b => b.classList.toggle('active', b.dataset.setLang === lang));
+    localStorage.setItem('mp-lang', lang);
+  }
+  langButtons.forEach(b => b.addEventListener('click', () => setLang(b.dataset.setLang)));
+  try{
+    const saved = localStorage.getItem('mp-lang');
+    if(saved) setLang(saved);
+  }catch(e){}
+
+  // Topbar scroll state
+  const topbar = document.getElementById('topbar');
+  const backTop = document.getElementById('backTop');
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    topbar.classList.toggle('scrolled', y > 40);
+    backTop.classList.toggle('show', y > 600);
+  });
+  backTop.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+
+  // Reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); } });
+    }, {threshold:0.12});
+    revealEls.forEach(el => obs.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('in'));
+  }
+
+  // Active chip highlight
+  const chips = document.querySelectorAll('.menu-nav .chip');
+  const pages = document.querySelectorAll('.menu-page, .lunch-banner');
+  if('IntersectionObserver' in window){
+    const navObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          const id = entry.target.id;
+          chips.forEach(c => c.classList.toggle('active', c.getAttribute('href') === '#'+id));
+        }
+      });
+    }, {rootMargin:'-45% 0px -45% 0px'});
+    pages.forEach(p => { if(p.id) navObs.observe(p); });
+  }
+</script>
+</body>
+</html>
