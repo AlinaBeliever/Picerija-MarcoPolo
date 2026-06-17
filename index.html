@@ -194,6 +194,9 @@
   }
   .hero-meta div{font-size:0.85rem; color:#D8D2BF;}
   .hero-meta strong{display:block; font-family:'Fraunces',serif; font-size:1.05rem; color:#fff; font-weight:600; margin-bottom:2px;}
+  .hero-meta-link{text-decoration:none; display:block; transition:opacity .2s ease;}
+  .hero-meta-link:hover{opacity:0.8;}
+  .hero-meta-link:hover strong{text-decoration:underline;}
 
   /* ---------- Sections generic ---------- */
   section{position:relative;}
@@ -295,75 +298,42 @@
   .menu-page-note{font-size:0.85rem; color:var(--ink-soft); font-style:italic; max-width:260px; text-align:right;}
 
   .menu-cols{
-    display:grid; grid-template-columns:auto 1fr auto auto auto; gap:6px 18px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+    gap:28px 32px;
     margin-top:24px;
-  }
-  .menu-cols.simple{grid-template-columns:1fr auto;}
-  .menu-col-label{
-    font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--ink-soft);
-    font-weight:700; padding-bottom:10px; border-bottom:1px solid var(--line); margin-bottom:6px;
-    grid-column:span 1;
-  }
-  .col-head-row{display:contents;}
-
-  .menu-row{
-    display:grid; grid-template-columns:auto 1fr auto auto auto;
-    gap:6px 18px;
-    padding:14px 0;
-    border-bottom:1px dashed var(--line);
     align-items:start;
   }
-  .menu-row:last-child{border-bottom:none;}
-  .menu-row.simple{grid-template-columns:1fr auto;}
-  .menu-row .name{font-weight:600; font-size:1.02rem; color:var(--ink);}
-  .menu-row .desc{
-    grid-column:1 / -1;
-    font-size:0.88rem; color:var(--ink-soft); margin-top:-4px; line-height:1.5;
+  .menu-cols.simple{grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));}
+  .menu-col-label, .col-head-row{display:none;}
+
+  .menu-row{
+    display:flex; flex-direction:column; gap:8px;
+    padding:0 0 18px;
+    border-bottom:1px dashed var(--line);
+    min-width:0;
   }
-  .menu-row.simple .desc{grid-column:1/2;}
+  .menu-row:last-child{border-bottom:none;}
+  .menu-row .name{font-weight:600; font-size:1.02rem; color:var(--ink); line-height:1.3; order:1;}
+  .menu-row .desc{
+    font-size:0.88rem; color:var(--ink-soft); line-height:1.5; margin:0; order:2;
+  }
+  .menu-row .price-row{display:flex; gap:10px; flex-wrap:wrap; margin-top:2px; order:3;}
+  .menu-row .price{order:3;}
   .price{
     font-family:'Fraunces',serif; font-weight:600; color:var(--pine-deep);
-    white-space:nowrap; text-align:right; font-size:1.02rem;
+    white-space:nowrap; font-size:1.02rem;
+    display:inline-flex; align-items:center; gap:5px;
+  }
+  .price .tag{
+    font-family:'Inter',sans-serif; font-weight:700; font-size:0.66rem;
+    text-transform:uppercase; letter-spacing:0.04em; color:var(--ink-soft);
+    background:var(--cream-soft); border-radius:6px; padding:2px 6px;
   }
   .price.dim{color:var(--ink-soft); font-weight:500; font-size:0.92rem;}
-  .price-head{font-size:0.72rem; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-soft); font-weight:700; text-align:right;}
+  .price-head{display:none;}
 
-  .menu-cols.spirits{grid-template-columns:1fr auto auto; gap:6px 22px;}
-  .menu-cols.spirits .menu-row{grid-template-columns:1fr auto auto;}
-  @media(max-width:640px){
-    .menu-cols.spirits{grid-template-columns:1fr; gap:0;}
-    .menu-cols.spirits .col-head-row{display:none;}
-    .menu-cols.spirits .menu-row{
-      grid-template-columns:1fr; display:flex; flex-wrap:wrap; padding:14px 0;
-    }
-    .menu-cols.spirits .menu-row .name{flex:1 0 100%;}
-    .menu-cols.spirits .menu-row .price{
-      order:2; text-align:left; font-size:0.92rem; margin-top:8px; margin-right:12px;
-      padding:4px 10px; background:var(--cream-soft); border-radius:8px;
-    }
-    .menu-cols.spirits .menu-row .price[data-size="sm"]::before{content:"0,03l "; font-size:0.68rem; color:var(--ink-soft); font-family:'Inter',sans-serif; font-weight:700;}
-    .menu-cols.spirits .menu-row .price[data-size="lg"]::before{content:"0,05l "; font-size:0.68rem; color:var(--ink-soft); font-family:'Inter',sans-serif; font-weight:700;}
-  }
-
-  @media(max-width:640px){
-    .menu-cols:not(.simple){grid-template-columns:1fr; gap:0;}
-    .menu-cols:not(.simple) .col-head-row{display:none;}
-    .menu-cols:not(.simple) .menu-row{
-      padding:16px 0;
-      display:flex; flex-wrap:wrap;
-    }
-    .menu-cols:not(.simple) .menu-row .name{flex:1 0 100%;}
-    .menu-cols:not(.simple) .menu-row .desc{flex:1 0 100%; order:1; margin-top:2px;}
-    .menu-cols:not(.simple) .menu-row .price{
-      order:2; text-align:left; font-size:0.92rem;
-      margin-top:8px; margin-right:16px;
-      padding:4px 10px; background:var(--cream-soft); border-radius:8px;
-    }
-    .menu-cols:not(.simple) .menu-row .price[data-size]::before{font-size:0.7rem; color:var(--ink-soft); font-family:'Inter',sans-serif; font-weight:700;}
-    .menu-cols:not(.simple) .menu-row .price[data-size="s"]::before{content:"MALA ";}
-    .menu-cols:not(.simple) .menu-row .price[data-size="l"]::before{content:"VELIKA ";}
-    .menu-cols:not(.simple) .menu-row .price[data-size="f"]::before{content:"DRUŽ. ";}
-  }
+  .menu-cols.spirits .menu-row .price .tag{background:var(--cream-soft);}
 
   .menu-foot-note{
     margin-top:22px; font-size:0.85rem; color:var(--ink-soft);
@@ -552,15 +522,18 @@
 
     <div class="hero-meta">
       <div>
-        <strong data-i18n-lang="sl">Trebija 19</strong>
-        <strong data-i18n-lang="en">Trebija 19</strong>
-        <span data-i18n-lang="sl">4224 Gorenja vas</span>
-        <span data-i18n-lang="en">4224 Gorenja vas, Slovenia</span>
+        <a class="hero-meta-link" href="https://maps.app.goo.gl/UxaxSMwpL1Dotq499?g_st=ic" target="_blank" rel="noopener">
+          <strong data-i18n-lang="sl">Trebija 19 ↗</strong>
+          <strong data-i18n-lang="en">Trebija 19 ↗</strong>
+          <span data-i18n-lang="sl">4224 Gorenja vas</span>
+          <span data-i18n-lang="en">4224 Gorenja vas, Slovenia</span>
+        </a>
       </div>
       <div>
-        <strong>+386 40 694 230</strong>
-        <span data-i18n-lang="sl">vsak dan</span>
-        <span data-i18n-lang="en">open daily</span>
+        <strong data-i18n-lang="sl">Odprto vsak dan</strong>
+        <strong data-i18n-lang="en">Open every day</strong>
+        <span data-i18n-lang="sl">tudi ob praznikih</span>
+        <span data-i18n-lang="en">including holidays</span>
       </div>
       <div>
         <strong data-i18n-lang="sl">Malice 9€</strong>
@@ -628,7 +601,7 @@
     </div>
 
     <!-- MALICA banner -->
-    <div class="lunch-banner reveal" id="malica">
+    <div class="lunch-banner" id="malica">
       <div>
         <h3 data-i18n-lang="sl">Dnevna malica</h3>
         <h3 data-i18n-lang="en">Daily lunch set</h3>
@@ -639,7 +612,7 @@
     </div>
 
     <!-- PICE -->
-    <article class="menu-page reveal" id="pice">
+    <article class="menu-page" id="pice">
       <div class="menu-page-head">
         <span class="script" data-i18n-lang="sl">Pice</span>
         <span class="script" data-i18n-lang="en">Pizza</span>
@@ -648,30 +621,23 @@
       </div>
 
       <div class="menu-cols">
-        <div class="col-head-row">
-          <span></span><span class="menu-col-label" data-i18n-lang="sl">Sestavine</span><span class="menu-col-label" data-i18n-lang="en">Ingredients</span>
-          <span class="price-head" data-i18n-lang="sl">mala</span><span class="price-head" data-i18n-lang="en">small</span>
-          <span class="price-head" data-i18n-lang="sl">velika</span><span class="price-head" data-i18n-lang="en">large</span>
-          <span class="price-head" data-i18n-lang="sl">druž.</span><span class="price-head" data-i18n-lang="en">family</span>
-        </div>
-
         <!-- rows -->
-        <div class="menu-row"><span class="name">Klasika</span><span class="desc">pelati, šunka, sir, šampinjoni</span><span data-size="s" class="price">9 €</span><span data-size="l" class="price">10,1 €</span><span data-size="f" class="price">27 €</span></div>
-        <div class="menu-row"><span class="name">Margerita</span><span class="desc">pelati, sir</span><span data-size="s" class="price">8,3 €</span><span data-size="l" class="price">8,8 €</span><span data-size="f" class="price">24,5 €</span></div>
-        <div class="menu-row"><span class="name">Kmečka</span><span class="desc">pelati, sir, šampinjoni, čebula, bržola, suha salama, jajce</span><span data-size="s" class="price">9,3 €</span><span data-size="l" class="price">11,3 €</span><span data-size="f" class="price">29 €</span></div>
-        <div class="menu-row"><span class="name">Kraška</span><span class="desc">pelati, sir, šampinjoni, olive, pršut</span><span data-size="s" class="price">9,3 €</span><span data-size="l" class="price">11,3 €</span><span data-size="f" class="price">29 €</span></div>
-        <div class="menu-row"><span class="name">Marco Polo</span><span class="desc">pelati, sir, šunka, šampinjoni, popečena slanina, hren / kisla smetana</span><span data-size="s" class="price">10,3 €</span><span data-size="l" class="price">11,8 €</span><span data-size="f" class="price">30 €</span></div>
-        <div class="menu-row"><span class="name">Tuna</span><span class="desc">pelati, sir, tuna, koruza, čebula</span><span data-size="s" class="price">9,1 €</span><span data-size="l" class="price">10 €</span><span data-size="f" class="price">26,3 €</span></div>
-        <div class="menu-row"><span class="name">Morska</span><span class="desc">pelati, sir, tržaška omaka, morski sadeži</span><span data-size="s" class="price">9,2 €</span><span data-size="l" class="price">10,8 €</span><span data-size="f" class="price">28 €</span></div>
-        <div class="menu-row"><span class="name">Jurček</span><span class="desc">pelati, sir, popečeni jurčki, tržaška omaka</span><span data-size="s" class="price">8,5 €</span><span data-size="l" class="price">9,6 €</span><span data-size="f" class="price">26,3 €</span></div>
-        <div class="menu-row"><span class="name">Štirje siri</span><span class="desc">pelati, štiri vrste sira</span><span data-size="s" class="price">8,7 €</span><span data-size="l" class="price">9,9 €</span><span data-size="f" class="price">25 €</span></div>
-        <div class="menu-row"><span class="name">Vegetarijanska</span><span class="desc">pelati, sir, šampinjoni, sezonska zelenjava</span><span data-size="s" class="price">8,6 €</span><span data-size="l" class="price">10 €</span><span data-size="f" class="price">26,3 €</span></div>
-        <div class="menu-row"><span class="name">Vražja</span><span class="desc">pikantna omaka, sir, šampinjoni, kulen</span><span data-size="s" class="price">8,9 €</span><span data-size="l" class="price">10,3 €</span><span data-size="f" class="price">25,5 €</span></div>
-        <div class="menu-row"><span class="name">Mocarela</span><span class="desc">pelati, sir, mocarela, paradižnik, bazilikin pesto</span><span data-size="s" class="price">9,1 €</span><span data-size="l" class="price">9,2 €</span><span data-size="f" class="price">24 €</span></div>
-        <div class="menu-row"><span class="name">Mehiška</span><span class="desc">pelati, sir, šampinjoni, koruza, fižol, paprika, nacho sir</span><span data-size="s" class="price">9,1 €</span><span data-size="l" class="price">9,2 €</span><span data-size="f" class="price">25 €</span></div>
-        <div class="menu-row"><span class="name">Rukola</span><span class="desc">pelati, sir, parmezan, češnjev paradižnik, rukola</span><span data-size="s" class="price">9 €</span><span data-size="l" class="price">9,8 €</span><span data-size="f" class="price">25 €</span></div>
-        <div class="menu-row"><span class="name" data-i18n-lang="sl">Družinska mešana</span><span class="name" data-i18n-lang="en">Family mixed</span><span class="desc" data-i18n-lang="sl">polovica s šunko, polovica vegetarijanska</span><span class="desc" data-i18n-lang="en">half ham, half vegetarian</span><span data-size="s" class="price dim">—</span><span data-size="l" class="price dim">—</span><span data-size="f" class="price">30 €</span></div>
-        <div class="menu-row"><span class="name">Pol-pol</span><span class="desc" data-i18n-lang="sl">poljubni dve polovici po izbiri</span><span class="desc" data-i18n-lang="en">any two halves of your choice</span><span data-size="s" class="price dim">—</span><span data-size="l" class="price">11 €</span><span data-size="f" class="price dim">—</span></div>
+        <div class="menu-row"><span class="name">Klasika</span><span class="desc">pelati, šunka, sir, šampinjoni</span><span class="price-row"><span class="price"><span class="tag">MALA</span>9 €</span><span class="price"><span class="tag">VELIKA</span>10,1 €</span><span class="price"><span class="tag">DRUŽ.</span>27 €</span></span></div>
+        <div class="menu-row"><span class="name">Margerita</span><span class="desc">pelati, sir</span><span class="price-row"><span class="price"><span class="tag">MALA</span>8,3 €</span><span class="price"><span class="tag">VELIKA</span>8,8 €</span><span class="price"><span class="tag">DRUŽ.</span>24,5 €</span></span></div>
+        <div class="menu-row"><span class="name">Kmečka</span><span class="desc">pelati, sir, šampinjoni, čebula, bržola, suha salama, jajce</span><span class="price-row"><span class="price"><span class="tag">MALA</span>9,3 €</span><span class="price"><span class="tag">VELIKA</span>11,3 €</span><span class="price"><span class="tag">DRUŽ.</span>29 €</span></span></div>
+        <div class="menu-row"><span class="name">Kraška</span><span class="desc">pelati, sir, šampinjoni, olive, pršut</span><span class="price-row"><span class="price"><span class="tag">MALA</span>9,3 €</span><span class="price"><span class="tag">VELIKA</span>11,3 €</span><span class="price"><span class="tag">DRUŽ.</span>29 €</span></span></div>
+        <div class="menu-row"><span class="name">Marco Polo</span><span class="desc">pelati, sir, šunka, šampinjoni, popečena slanina, hren / kisla smetana</span><span class="price-row"><span class="price"><span class="tag">MALA</span>10,3 €</span><span class="price"><span class="tag">VELIKA</span>11,8 €</span><span class="price"><span class="tag">DRUŽ.</span>30 €</span></span></div>
+        <div class="menu-row"><span class="name">Tuna</span><span class="desc">pelati, sir, tuna, koruza, čebula</span><span class="price-row"><span class="price"><span class="tag">MALA</span>9,1 €</span><span class="price"><span class="tag">VELIKA</span>10 €</span><span class="price"><span class="tag">DRUŽ.</span>26,3 €</span></span></div>
+        <div class="menu-row"><span class="name">Morska</span><span class="desc">pelati, sir, tržaška omaka, morski sadeži</span><span class="price-row"><span class="price"><span class="tag">MALA</span>9,2 €</span><span class="price"><span class="tag">VELIKA</span>10,8 €</span><span class="price"><span class="tag">DRUŽ.</span>28 €</span></span></div>
+        <div class="menu-row"><span class="name">Jurček</span><span class="desc">pelati, sir, popečeni jurčki, tržaška omaka</span><span class="price-row"><span class="price"><span class="tag">MALA</span>8,5 €</span><span class="price"><span class="tag">VELIKA</span>9,6 €</span><span class="price"><span class="tag">DRUŽ.</span>26,3 €</span></span></div>
+        <div class="menu-row"><span class="name">Štirje siri</span><span class="desc">pelati, štiri vrste sira</span><span class="price-row"><span class="price"><span class="tag">MALA</span>8,7 €</span><span class="price"><span class="tag">VELIKA</span>9,9 €</span><span class="price"><span class="tag">DRUŽ.</span>25 €</span></span></div>
+        <div class="menu-row"><span class="name">Vegetarijanska</span><span class="desc">pelati, sir, šampinjoni, sezonska zelenjava</span><span class="price-row"><span class="price"><span class="tag">MALA</span>8,6 €</span><span class="price"><span class="tag">VELIKA</span>10 €</span><span class="price"><span class="tag">DRUŽ.</span>26,3 €</span></span></div>
+        <div class="menu-row"><span class="name">Vražja</span><span class="desc">pikantna omaka, sir, šampinjoni, kulen</span><span class="price-row"><span class="price"><span class="tag">MALA</span>8,9 €</span><span class="price"><span class="tag">VELIKA</span>10,3 €</span><span class="price"><span class="tag">DRUŽ.</span>25,5 €</span></span></div>
+        <div class="menu-row"><span class="name">Mocarela</span><span class="desc">pelati, sir, mocarela, paradižnik, bazilikin pesto</span><span class="price-row"><span class="price"><span class="tag">MALA</span>9,1 €</span><span class="price"><span class="tag">VELIKA</span>9,2 €</span><span class="price"><span class="tag">DRUŽ.</span>24 €</span></span></div>
+        <div class="menu-row"><span class="name">Mehiška</span><span class="desc">pelati, sir, šampinjoni, koruza, fižol, paprika, nacho sir</span><span class="price-row"><span class="price"><span class="tag">MALA</span>9,1 €</span><span class="price"><span class="tag">VELIKA</span>9,2 €</span><span class="price"><span class="tag">DRUŽ.</span>25 €</span></span></div>
+        <div class="menu-row"><span class="name">Rukola</span><span class="desc">pelati, sir, parmezan, češnjev paradižnik, rukola</span><span class="price-row"><span class="price"><span class="tag">MALA</span>9 €</span><span class="price"><span class="tag">VELIKA</span>9,8 €</span><span class="price"><span class="tag">DRUŽ.</span>25 €</span></span></div>
+        <div class="menu-row"><span class="name" data-i18n-lang="sl">Družinska mešana</span><span class="name" data-i18n-lang="en">Family mixed</span><span class="desc" data-i18n-lang="sl">polovica s šunko, polovica vegetarijanska</span><span class="desc" data-i18n-lang="en">half ham, half vegetarian</span><span class="price-row"><span class="price dim"><span class="tag">MALA</span>—</span><span class="price dim"><span class="tag">VELIKA</span>—</span><span class="price"><span class="tag">DRUŽ.</span>30 €</span></span></div>
+        <div class="menu-row"><span class="name">Pol-pol</span><span class="desc" data-i18n-lang="sl">poljubni dve polovici po izbiri</span><span class="desc" data-i18n-lang="en">any two halves of your choice</span><span class="price-row"><span class="price dim"><span class="tag">MALA</span>—</span><span class="price"><span class="tag">VELIKA</span>11 €</span><span class="price dim"><span class="tag">DRUŽ.</span>—</span></span></div>
       </div>
 
       <div class="menu-foot-note" data-i18n-lang="sl"><strong>Dodatki:</strong> sir, šunka, pršut, slanina in drugi dodatki na voljo posebej (od 1 € do 4 € glede na sestavino) — povprašajte strežno osebje.</div>
@@ -679,7 +645,7 @@
     </article>
 
     <!-- SOLATNI KROŽNIKI -->
-    <article class="menu-page reveal" id="solate">
+    <article class="menu-page" id="solate">
       <div class="menu-page-head">
         <span class="script" data-i18n-lang="sl">Solatni krožniki</span>
         <span class="script" data-i18n-lang="en">Salad plates</span>
@@ -732,7 +698,7 @@
     </article>
 
     <!-- ZREZKI & KALAMARI -->
-    <article class="menu-page reveal" id="zrezki">
+    <article class="menu-page" id="zrezki">
       <div class="menu-page-head">
         <span class="script" data-i18n-lang="sl">Zrezki</span>
         <span class="script" data-i18n-lang="en">Steaks</span>
@@ -768,7 +734,7 @@
     </article>
 
     <!-- PRILOGE & SOLATE -->
-    <article class="menu-page reveal" id="priloge">
+    <article class="menu-page" id="priloge">
       <div class="menu-page-head">
         <span class="script" data-i18n-lang="sl">Priloge</span>
         <span class="script" data-i18n-lang="en">Side dishes</span>
@@ -799,7 +765,7 @@
     </article>
 
     <!-- JUHE & OSTALE JEDI -->
-    <article class="menu-page reveal" id="juhe">
+    <article class="menu-page" id="juhe">
       <div class="menu-page-head">
         <span class="script" data-i18n-lang="sl">Juhe</span>
         <span class="script" data-i18n-lang="en">Soups</span>
@@ -849,7 +815,7 @@
     </article>
 
     <!-- SLADICE -->
-    <article class="menu-page reveal" id="sladice">
+    <article class="menu-page" id="sladice">
       <div class="menu-page-head">
         <span class="script" data-i18n-lang="sl">Sladice</span>
         <span class="script" data-i18n-lang="en">Desserts</span>
@@ -866,7 +832,7 @@
     </article>
 
     <!-- PIJAČE -->
-    <article class="menu-page reveal" id="pijace">
+    <article class="menu-page" id="pijace">
       <div class="menu-page-head">
         <span class="script" data-i18n-lang="sl">Pijače</span>
         <span class="script" data-i18n-lang="en">Drinks</span>
@@ -915,30 +881,25 @@
         <span style="font-family:'Fraunces',serif; font-weight:600; font-size:1.1rem; color:var(--ink);" data-i18n-lang="en">Spirits</span>
       </div>
       <div class="menu-cols spirits">
-        <div class="col-head-row">
-          <span></span>
-          <span class="price-head">0,03 l</span>
-          <span class="price-head">0,05 l</span>
-        </div>
-        <div class="menu-row spirits-row"><span class="name">Sadjevec</span><span class="price" data-size="sm">1,90 €</span><span class="price" data-size="lg">2,10 €</span></div>
-        <div class="menu-row spirits-row"><span class="name">Pelinkovec</span><span class="price" data-size="sm">2,10 €</span><span class="price" data-size="lg">2,40 €</span></div>
-        <div class="menu-row spirits-row"><span class="name">Travarica</span><span class="price" data-size="sm">2,10 €</span><span class="price" data-size="lg">2,40 €</span></div>
-        <div class="menu-row spirits-row"><span class="name">Rum</span><span class="price" data-size="sm">2,10 €</span><span class="price" data-size="lg">2,40 €</span></div>
-        <div class="menu-row spirits-row"><span class="name">Vodka</span><span class="price" data-size="sm">2,00 €</span><span class="price" data-size="lg">2,80 €</span></div>
-        <div class="menu-row spirits-row"><span class="name">Limonce</span><span class="price" data-size="sm">2,00 €</span><span class="price" data-size="lg">2,40 €</span></div>
-        <div class="menu-row spirits-row"><span class="name">Borovničke</span><span class="price" data-size="sm">2,00 €</span><span class="price" data-size="lg">2,40 €</span></div>
-        <div class="menu-row spirits-row"><span class="name">Malince</span><span class="price" data-size="sm">2,00 €</span><span class="price" data-size="lg">2,40 €</span></div>
-        <div class="menu-row spirits-row"><span class="name">Smrekovec</span><span class="price" data-size="sm">2,00 €</span><span class="price" data-size="lg">2,40 €</span></div>
-        <div class="menu-row spirits-row"><span class="name" data-i18n-lang="sl">Vodka črna</span><span class="name" data-i18n-lang="en">Vodka, black</span><span class="price" data-size="sm">2,00 €</span><span class="price" data-size="lg">2,30 €</span></div>
-        <div class="menu-row spirits-row"><span class="name">Viski <em style="font-style:italic; font-weight:400; font-size:0.85em;">(Jameson / Jack Daniels)</em></span><span class="price" data-size="sm">3,40 €</span><span class="price dim" data-size="lg">—</span></div>
-        <div class="menu-row spirits-row"><span class="name">Viljamovka</span><span class="price" data-size="sm">3,20 €</span><span class="price dim" data-size="lg">—</span></div>
-        <div class="menu-row spirits-row"><span class="name">Jägermeister</span><span class="price" data-size="sm">2,80 €</span><span class="price dim" data-size="lg">—</span></div>
-        <div class="menu-row spirits-row"><span class="name">Malibu</span><span class="price" data-size="sm">2,60 €</span><span class="price dim" data-size="lg">—</span></div>
-        <div class="menu-row spirits-row"><span class="name">Tekila</span><span class="price" data-size="sm">2,80 €</span><span class="price dim" data-size="lg">—</span></div>
-        <div class="menu-row spirits-row"><span class="name">Gin</span><span class="price" data-size="sm">2,50 €</span><span class="price dim" data-size="lg">—</span></div>
-        <div class="menu-row spirits-row"><span class="name">Stock</span><span class="price" data-size="sm">2,50 €</span><span class="price dim" data-size="lg">—</span></div>
-        <div class="menu-row spirits-row"><span class="name">Cynar</span><span class="price" data-size="sm">2,20 €</span><span class="price dim" data-size="lg">—</span></div>
-        <div class="menu-row spirits-row"><span class="name">Brinjevec</span><span class="price" data-size="sm">3,10 €</span><span class="price dim" data-size="lg">—</span></div>
+        <div class="menu-row spirits-row"><span class="name">Sadjevec</span><span class="price-row"><span class="price"><span class="tag">0,03L</span>1,90 €</span><span class="price"><span class="tag">0,05L</span>2,10 €</span></span></div>
+        <div class="menu-row spirits-row"><span class="name">Pelinkovec</span><span class="price-row"><span class="price"><span class="tag">0,03L</span>2,10 €</span><span class="price"><span class="tag">0,05L</span>2,40 €</span></span></div>
+        <div class="menu-row spirits-row"><span class="name">Travarica</span><span class="price-row"><span class="price"><span class="tag">0,03L</span>2,10 €</span><span class="price"><span class="tag">0,05L</span>2,40 €</span></span></div>
+        <div class="menu-row spirits-row"><span class="name">Rum</span><span class="price-row"><span class="price"><span class="tag">0,03L</span>2,10 €</span><span class="price"><span class="tag">0,05L</span>2,40 €</span></span></div>
+        <div class="menu-row spirits-row"><span class="name">Vodka</span><span class="price-row"><span class="price"><span class="tag">0,03L</span>2,00 €</span><span class="price"><span class="tag">0,05L</span>2,80 €</span></span></div>
+        <div class="menu-row spirits-row"><span class="name">Limonce</span><span class="price-row"><span class="price"><span class="tag">0,03L</span>2,00 €</span><span class="price"><span class="tag">0,05L</span>2,40 €</span></span></div>
+        <div class="menu-row spirits-row"><span class="name">Borovničke</span><span class="price-row"><span class="price"><span class="tag">0,03L</span>2,00 €</span><span class="price"><span class="tag">0,05L</span>2,40 €</span></span></div>
+        <div class="menu-row spirits-row"><span class="name">Malince</span><span class="price-row"><span class="price"><span class="tag">0,03L</span>2,00 €</span><span class="price"><span class="tag">0,05L</span>2,40 €</span></span></div>
+        <div class="menu-row spirits-row"><span class="name">Smrekovec</span><span class="price-row"><span class="price"><span class="tag">0,03L</span>2,00 €</span><span class="price"><span class="tag">0,05L</span>2,40 €</span></span></div>
+        <div class="menu-row spirits-row"><span class="name" data-i18n-lang="sl">Vodka črna</span><span class="name" data-i18n-lang="en">Vodka, black</span><span class="price-row"><span class="price"><span class="tag">0,03L</span>2,00 €</span><span class="price"><span class="tag">0,05L</span>2,30 €</span></span></div>
+        <div class="menu-row spirits-row"><span class="name">Viski <em style="font-style:italic; font-weight:400; font-size:0.85em;">(Jameson / Jack Daniels)</em></span><span class="price-row"><span class="price"><span class="tag">0,03L</span>3,40 €</span><span class="price dim"><span class="tag">0,05L</span>—</span></span></div>
+        <div class="menu-row spirits-row"><span class="name">Viljamovka</span><span class="price-row"><span class="price"><span class="tag">0,03L</span>3,20 €</span><span class="price dim"><span class="tag">0,05L</span>—</span></span></div>
+        <div class="menu-row spirits-row"><span class="name">Jägermeister</span><span class="price-row"><span class="price"><span class="tag">0,03L</span>2,80 €</span><span class="price dim"><span class="tag">0,05L</span>—</span></span></div>
+        <div class="menu-row spirits-row"><span class="name">Malibu</span><span class="price-row"><span class="price"><span class="tag">0,03L</span>2,60 €</span><span class="price dim"><span class="tag">0,05L</span>—</span></span></div>
+        <div class="menu-row spirits-row"><span class="name">Tekila</span><span class="price-row"><span class="price"><span class="tag">0,03L</span>2,80 €</span><span class="price dim"><span class="tag">0,05L</span>—</span></span></div>
+        <div class="menu-row spirits-row"><span class="name">Gin</span><span class="price-row"><span class="price"><span class="tag">0,03L</span>2,50 €</span><span class="price dim"><span class="tag">0,05L</span>—</span></span></div>
+        <div class="menu-row spirits-row"><span class="name">Stock</span><span class="price-row"><span class="price"><span class="tag">0,03L</span>2,50 €</span><span class="price dim"><span class="tag">0,05L</span>—</span></span></div>
+        <div class="menu-row spirits-row"><span class="name">Cynar</span><span class="price-row"><span class="price"><span class="tag">0,03L</span>2,20 €</span><span class="price dim"><span class="tag">0,05L</span>—</span></span></div>
+        <div class="menu-row spirits-row"><span class="name">Brinjevec</span><span class="price-row"><span class="price"><span class="tag">0,03L</span>3,10 €</span><span class="price dim"><span class="tag">0,05L</span>—</span></span></div>
       </div>
 
       <div class="menu-page-head" style="border-bottom:none; padding-bottom:0; margin:30px 0 0;">
