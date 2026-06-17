@@ -364,16 +364,58 @@
   }
   .lunch-price span{font-size:1rem; font-weight:500; color:#D9E6CF; display:block; margin-top:4px;}
 
-  /* ---------- Gallery strip ---------- */
-  .gallery-strip{
-    display:grid; grid-template-columns:repeat(3,1fr); gap:14px;
+  /* ---------- Gallery carousel ---------- */
+  .carousel{
+    position:relative;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 20px 50px -20px rgba(20,40,25,0.4);
+    aspect-ratio:16/9;
+    background:#000;
   }
-  @media(max-width:760px){ .gallery-strip{grid-template-columns:repeat(2,1fr);} }
-  .gallery-strip figure{
-    margin:0; border-radius:14px; overflow:hidden; aspect-ratio:3/4; box-shadow:0 10px 30px -14px rgba(20,40,25,0.4);
+  .carousel-track{
+    position:relative;
+    width:100%; height:100%;
   }
-  .gallery-strip img{width:100%; height:100%; object-fit:cover; transition:transform .5s ease;}
-  .gallery-strip figure:hover img{transform:scale(1.06);}
+  .carousel-slide{
+    margin:0;
+    position:absolute; inset:0;
+    opacity:0;
+    transition:opacity .6s ease;
+    pointer-events:none;
+  }
+  .carousel-slide.active{
+    opacity:1;
+    pointer-events:auto;
+  }
+  .carousel-slide img{width:100%; height:100%; object-fit:cover;}
+  .carousel-arrow{
+    position:absolute; top:50%; transform:translateY(-50%);
+    width:42px; height:42px; border-radius:50%;
+    background:rgba(20,30,18,0.45); border:1px solid rgba(255,255,255,0.4);
+    color:#fff; font-size:1.6rem; line-height:1; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    transition:background .2s ease;
+    z-index:5;
+  }
+  .carousel-arrow:hover{background:rgba(20,30,18,0.75);}
+  .carousel-arrow.prev{left:16px;}
+  .carousel-arrow.next{right:16px;}
+  .carousel-dots{
+    position:absolute; bottom:16px; left:0; right:0;
+    display:flex; justify-content:center; gap:9px;
+    z-index:5;
+  }
+  .carousel-dot{
+    width:9px; height:9px; border-radius:50%;
+    background:rgba(255,255,255,0.45); border:none; cursor:pointer; padding:0;
+    transition:background .25s ease, transform .25s ease;
+  }
+  .carousel-dot.active{background:#fff; transform:scale(1.25);}
+  @media(max-width:700px){
+    .carousel{aspect-ratio:4/5;}
+    .carousel-arrow{width:36px; height:36px; font-size:1.3rem;}
+  }
 
   /* ---------- Visit / location ---------- */
   .visit{background:var(--pine-deep); color:#fff; position:relative; overflow:hidden;}
@@ -986,12 +1028,23 @@
       <p data-i18n-lang="sl">Pogrnjena miza na terasi, fasada picerije, naše pice in zlato ocvrt krompirček.</p>
       <p data-i18n-lang="en">A set table on the terrace, the pizzeria's façade, our pizzas, and golden fried potatoes.</p>
     </div>
-    <div class="gallery-strip reveal">
-      <figure><img src="gallery-table.jpg" alt="Pogrnjena miza na terasi picerije Marco Polo"></figure>
-      <figure><img src="gallery-building.jpg" alt="Fasada picerije Marco Polo v Trebiji"></figure>
-      <figure><img src="gallery-pizza-bacon.jpg" alt="Pica s slanino in žlikrofi v omaki"></figure>
-      <figure><img src="gallery-pizza-veggie.jpg" alt="Vegetarijanska pica s papriko in šampinjoni"></figure>
-      <figure><img src="gallery-fries.jpg" alt="Ocvrt krompirček in ribji file"></figure>
+    <div class="carousel reveal" id="galerija-carousel">
+      <div class="carousel-track">
+        <figure class="carousel-slide active"><img src="gallery-table.jpg" alt="Pogrnjena miza na terasi picerije Marco Polo"></figure>
+        <figure class="carousel-slide"><img src="gallery-building.jpg" alt="Fasada picerije Marco Polo v Trebiji"></figure>
+        <figure class="carousel-slide"><img src="gallery-pizza-bacon.jpg" alt="Pica s slanino in žlikrofi v omaki"></figure>
+        <figure class="carousel-slide"><img src="gallery-pizza-veggie.jpg" alt="Vegetarijanska pica s papriko in šampinjoni"></figure>
+        <figure class="carousel-slide"><img src="gallery-fries.jpg" alt="Ocvrt krompirček in ribji file"></figure>
+      </div>
+      <button class="carousel-arrow prev" aria-label="Previous photo" data-dir="-1">&#8249;</button>
+      <button class="carousel-arrow next" aria-label="Next photo" data-dir="1">&#8250;</button>
+      <div class="carousel-dots">
+        <button class="carousel-dot active" data-index="0" aria-label="Photo 1"></button>
+        <button class="carousel-dot" data-index="1" aria-label="Photo 2"></button>
+        <button class="carousel-dot" data-index="2" aria-label="Photo 3"></button>
+        <button class="carousel-dot" data-index="3" aria-label="Photo 4"></button>
+        <button class="carousel-dot" data-index="4" aria-label="Photo 5"></button>
+      </div>
     </div>
   </div>
 </section>
@@ -1140,6 +1193,49 @@
     }, {rootMargin:'-45% 0px -45% 0px'});
     pages.forEach(p => { if(p.id) navObs.observe(p); });
   }
+
+  // Gallery carousel: auto-advance every 2s, looping, resumes after manual interaction
+  (function(){
+    const root = document.getElementById('galerija-carousel');
+    if(!root) return;
+    const slides = Array.from(root.querySelectorAll('.carousel-slide'));
+    const dots = Array.from(root.querySelectorAll('.carousel-dot'));
+    const arrows = root.querySelectorAll('.carousel-arrow');
+    let current = 0;
+    let timer = null;
+    const INTERVAL = 2000;
+
+    function show(index){
+      current = (index + slides.length) % slides.length;
+      slides.forEach((s, i) => s.classList.toggle('active', i === current));
+      dots.forEach((d, i) => d.classList.toggle('active', i === current));
+    }
+
+    function startAuto(){
+      if(timer) clearInterval(timer);
+      timer = setInterval(() => show(current + 1), INTERVAL);
+    }
+
+    function restartAuto(){
+      startAuto();
+    }
+
+    arrows.forEach(btn => {
+      btn.addEventListener('click', () => {
+        show(current + parseInt(btn.dataset.dir, 10));
+        restartAuto();
+      });
+    });
+    dots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        show(parseInt(dot.dataset.index, 10));
+        restartAuto();
+      });
+    });
+
+    show(0);
+    startAuto();
+  })();
 </script>
 </body>
 </html>
