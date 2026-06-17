@@ -367,53 +367,40 @@
   /* ---------- Gallery carousel ---------- */
   .carousel{
     position:relative;
-    border-radius:18px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .carousel-viewport{
     overflow:hidden;
-    box-shadow:0 20px 50px -20px rgba(20,40,25,0.4);
-    aspect-ratio:16/9;
-    background:#000;
+    border-radius:18px;
+    flex:1;
   }
   .carousel-track{
-    position:relative;
-    width:100%; height:100%;
+    display:flex;
+    transition:transform .6s ease;
+    will-change:transform;
   }
   .carousel-slide{
     margin:0;
-    position:absolute; inset:0;
-    opacity:0;
-    transition:opacity .6s ease;
-    pointer-events:none;
+    flex:0 0 calc((100% - 2*14px) / 3);
+    margin-right:14px;
+    border-radius:14px;
+    overflow:hidden;
+    aspect-ratio:3/4;
+    box-shadow:0 10px 30px -14px rgba(20,40,25,0.4);
   }
-  .carousel-slide.active{
-    opacity:1;
-    pointer-events:auto;
-  }
-  .carousel-slide img{width:100%; height:100%; object-fit:cover;}
+  .carousel-slide img{width:100%; height:100%; object-fit:cover; display:block;}
   .carousel-arrow{
-    position:absolute; top:50%; transform:translateY(-50%);
+    flex:0 0 auto;
     width:42px; height:42px; border-radius:50%;
-    background:rgba(20,30,18,0.45); border:1px solid rgba(255,255,255,0.4);
+    background:var(--pine); border:none;
     color:#fff; font-size:1.6rem; line-height:1; cursor:pointer;
     display:flex; align-items:center; justify-content:center;
-    transition:background .2s ease;
-    z-index:5;
+    transition:background .2s ease, transform .2s ease;
+    box-shadow:0 8px 20px -8px rgba(20,40,25,0.45);
   }
-  .carousel-arrow:hover{background:rgba(20,30,18,0.75);}
-  .carousel-arrow.prev{left:16px;}
-  .carousel-arrow.next{right:16px;}
-  .carousel-dots{
-    position:absolute; bottom:16px; left:0; right:0;
-    display:flex; justify-content:center; gap:9px;
-    z-index:5;
-  }
-  .carousel-dot{
-    width:9px; height:9px; border-radius:50%;
-    background:rgba(255,255,255,0.45); border:none; cursor:pointer; padding:0;
-    transition:background .25s ease, transform .25s ease;
-  }
-  .carousel-dot.active{background:#fff; transform:scale(1.25);}
-  @media(max-width:700px){
-    .carousel{aspect-ratio:4/5;}
+  .carousel-arrow:hover{background:var(--pine-deep); transform:scale(1.06);}
+  @media(max-width:760px){
+    .carousel-slide{flex:0 0 calc((100% - 14px) / 2);}
     .carousel-arrow{width:36px; height:36px; font-size:1.3rem;}
   }
 
@@ -1029,22 +1016,17 @@
       <p data-i18n-lang="en">A set table on the terrace, the pizzeria's façade, our pizzas, and golden fried potatoes.</p>
     </div>
     <div class="carousel reveal" id="galerija-carousel">
-      <div class="carousel-track">
-        <figure class="carousel-slide active"><img src="gallery-table.jpg" alt="Pogrnjena miza na terasi picerije Marco Polo"></figure>
-        <figure class="carousel-slide"><img src="gallery-building.jpg" alt="Fasada picerije Marco Polo v Trebiji"></figure>
-        <figure class="carousel-slide"><img src="gallery-pizza-bacon.jpg" alt="Pica s slanino in žlikrofi v omaki"></figure>
-        <figure class="carousel-slide"><img src="gallery-pizza-veggie.jpg" alt="Vegetarijanska pica s papriko in šampinjoni"></figure>
-        <figure class="carousel-slide"><img src="gallery-fries.jpg" alt="Ocvrt krompirček in ribji file"></figure>
-      </div>
       <button class="carousel-arrow prev" aria-label="Previous photo" data-dir="-1">&#8249;</button>
-      <button class="carousel-arrow next" aria-label="Next photo" data-dir="1">&#8250;</button>
-      <div class="carousel-dots">
-        <button class="carousel-dot active" data-index="0" aria-label="Photo 1"></button>
-        <button class="carousel-dot" data-index="1" aria-label="Photo 2"></button>
-        <button class="carousel-dot" data-index="2" aria-label="Photo 3"></button>
-        <button class="carousel-dot" data-index="3" aria-label="Photo 4"></button>
-        <button class="carousel-dot" data-index="4" aria-label="Photo 5"></button>
+      <div class="carousel-viewport">
+        <div class="carousel-track">
+          <figure class="carousel-slide"><img src="gallery-table.jpg" alt="Pogrnjena miza na terasi picerije Marco Polo"></figure>
+          <figure class="carousel-slide"><img src="gallery-building.jpg" alt="Fasada picerije Marco Polo v Trebiji"></figure>
+          <figure class="carousel-slide"><img src="gallery-pizza-bacon.jpg" alt="Pica s slanino in žlikrofi v omaki"></figure>
+          <figure class="carousel-slide"><img src="gallery-pizza-veggie.jpg" alt="Vegetarijanska pica s papriko in šampinjoni"></figure>
+          <figure class="carousel-slide"><img src="gallery-fries.jpg" alt="Ocvrt krompirček in ribji file"></figure>
+        </div>
       </div>
+      <button class="carousel-arrow next" aria-label="Next photo" data-dir="1">&#8250;</button>
     </div>
   </div>
 </section>
@@ -1194,46 +1176,67 @@
     pages.forEach(p => { if(p.id) navObs.observe(p); });
   }
 
-  // Gallery carousel: auto-advance every 2s, looping, resumes after manual interaction
+  // Gallery carousel: auto-scroll one photo at a time every 2s, infinite loop, resumes after manual interaction
   (function(){
     const root = document.getElementById('galerija-carousel');
     if(!root) return;
-    const slides = Array.from(root.querySelectorAll('.carousel-slide'));
-    const dots = Array.from(root.querySelectorAll('.carousel-dot'));
+    const track = root.querySelector('.carousel-track');
     const arrows = root.querySelectorAll('.carousel-arrow');
-    let current = 0;
-    let timer = null;
+    const originalSlides = Array.from(track.children);
+    const total = originalSlides.length;
     const INTERVAL = 2000;
 
-    function show(index){
-      current = (index + slides.length) % slides.length;
-      slides.forEach((s, i) => s.classList.toggle('active', i === current));
-      dots.forEach((d, i) => d.classList.toggle('active', i === current));
+    // Clone all slides once and append, so we can loop seamlessly without a visible jump
+    originalSlides.forEach(s => track.appendChild(s.cloneNode(true)));
+
+    let index = 0;
+    let timer = null;
+
+    function applyPosition(withTransition){
+      track.style.transition = withTransition ? 'transform .6s ease' : 'none';
+      const slideWidth = originalSlides[0].getBoundingClientRect().width + 14; // includes margin-right gap
+      track.style.transform = `translateX(-${index * slideWidth}px)`;
+    }
+
+    function goTo(newIndex){
+      index = newIndex;
+      applyPosition(true);
+      if(index >= total){
+        // after the transition finishes, snap back to the real (non-cloned) position instantly
+        setTimeout(() => {
+          index = index - total;
+          applyPosition(false);
+        }, 600);
+      }
+    }
+
+    function next(){ goTo(index + 1); }
+    function prev(){
+      if(index === 0){
+        // jump instantly to the cloned tail position, then animate back one step
+        index = total;
+        applyPosition(false);
+        requestAnimationFrame(() => goTo(index - 1));
+      } else {
+        goTo(index - 1);
+      }
     }
 
     function startAuto(){
       if(timer) clearInterval(timer);
-      timer = setInterval(() => show(current + 1), INTERVAL);
-    }
-
-    function restartAuto(){
-      startAuto();
+      timer = setInterval(next, INTERVAL);
     }
 
     arrows.forEach(btn => {
       btn.addEventListener('click', () => {
-        show(current + parseInt(btn.dataset.dir, 10));
-        restartAuto();
-      });
-    });
-    dots.forEach(dot => {
-      dot.addEventListener('click', () => {
-        show(parseInt(dot.dataset.index, 10));
-        restartAuto();
+        if(btn.dataset.dir === '1') next(); else prev();
+        startAuto();
       });
     });
 
-    show(0);
+    window.addEventListener('resize', () => applyPosition(false));
+
+    applyPosition(false);
     startAuto();
   })();
 </script>
